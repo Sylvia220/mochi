@@ -25,6 +25,10 @@
      另：旧版本残留的 data-theme 属性在此强制清掉，保证「选浅色」真回浅色。 -->
 <script>try{var _tm=localStorage.getItem('xy-home-v2:theme-mode');if(_tm==='dark'||(_tm!=='light'&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');else document.documentElement.removeAttribute('data-theme');}catch(e){}</script>
 <style>
+.app[data-app="eat"] { display: none !important; }
+.app[data-app="piggy"] { display: none !important; }
+.app[data-app="tongpin"] { display: none !important; }
+.app[data-app="shenshou"] { display: none !important; }
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
 :root {
 color-scheme:only light;
