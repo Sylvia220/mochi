@@ -29,6 +29,13 @@
 .app[data-app="piggy"] { display: none !important; }
 .app[data-app="tongpin"] { display: none !important; }
 .app[data-app="shenshou"] { display: none !important; }
+/* 让剩余的图标自动居中、均匀分布 */
+#desktop-pages .app-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: center !important; /* 关键：让剩下的图标居中 */
+    gap: 16px !important; /* 调整图标之间的间距 */
+}
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
 :root {
 color-scheme:only light;
