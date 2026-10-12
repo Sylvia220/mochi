@@ -10453,6 +10453,102 @@ font-family:inherit; padding:4px 2px; cursor:pointer; -webkit-tap-highlight-colo
 .gc-set-row .txt { font-size: calc(14px + var(--mochi-text-adj, 0px)); }
 </style>
 </head>
+<!-- 自定义的图片选择弹窗 -->
+<div id="custom-photo-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:99999; align-items:center; justify-content:center; flex-direction:column;">
+  <div style="background:#fff; padding:24px; border-radius:16px; width:80%; max-width:320px; text-align:center;">
+    <h3 style="margin-top:0; font-size:18px; margin-bottom:20px;">发送图片</h3>
+    <button id="btn-choose-gallery" style="display:block; width:100%; padding:14px; margin-bottom:12px; background:#f2f2f2; border:none; border-radius:10px; font-size:16px; color:#000;">从相册选择</button>
+    <button id="btn-take-photo" style="display:block; width:100%; padding:14px; margin-bottom:12px; background:#111; color:#fff; border:none; border-radius:10px; font-size:16px;">拍照</button>
+    <button id="btn-cancel-photo" style="display:block; width:100%; padding:14px; background:none; border:none; color:#999; font-size:14px;">取消</button>
+  </div>
+</div>
+
+<!-- 隐藏的拍照界面 -->
+<div id="custom-camera-modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#000; z-index:100000; flex-direction:column;">
+  <video id="custom-camera-video" autoplay playsinline style="flex:1; object-fit:cover; width:100%;"></video>
+  <div style="padding:20px; text-align:center; background:#000;">
+    <button id="btn-snapshot" style="padding:14px 40px; border-radius:50px; border:none; background:#fff; color:#000; font-size:18px; font-weight:bold;">拍摄</button>
+    <button id="btn-close-camera" style="padding:14px 30px; border-radius:50px; border:none; background:transparent; color:#fff; font-size:16px; margin-left:10px;">取消</button>
+  </div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    // 1. 找到你原本的图片按钮和输入框
+    const nativeInput = document.getElementById('chat-img-tap');
+    // 找到包裹它的 label（通常点击的是 label 或者按钮）
+    const imgLabel = document.querySelector('label[for="chat-img-tap"]');
+
+    if (!nativeInput || !imgLabel) {
+        console.log("未找到图片上传按钮，跳过自定义修改");
+        return;
+    }
+
+    // 2. 拦截原本的点击，弹出自定义选择框
+    imgLabel.addEventListener('click', function(e) {
+        e.preventDefault(); // 阻止原生相册弹出
+        e.stopPropagation(); // 阻止事件冒泡
+        document.getElementById('custom-photo-modal').style.display = "flex";
+    });
+
+    // 3. 用户选“从相册选择” -> 触发原本的 input
+    document.getElementById('btn-choose-gallery').onclick = function() {
+        document.getElementById('custom-photo-modal').style.display = "none";
+        nativeInput.click(); // 手动触发原生相册
+    };
+
+    // 4. 用户选“拍照” -> 开启摄像头流
+    let cameraStream = null;
+    document.getElementById('btn-take-photo').onclick = async function() {
+        document.getElementById('custom-photo-modal').style.display = "none";
+        document.getElementById('custom-camera-modal').style.display = "flex";
+        try {
+            // 请求摄像头权限
+            cameraStream = await navigator.mediaDevices.getUserMedia({ 
+                video: { facingMode: "environment" } // environment 代表后置摄像头，user 代表前置
+            });
+            document.getElementById('custom-camera-video').srcObject = cameraStream;
+        } catch (err) {
+            alert("无法打开摄像头，请确保您已允许此网站使用摄像头。错误：" + err.message);
+            document.getElementById('custom-camera-modal').style.display = "none";
+        }
+    };
+
+    // 5. 用户按下“拍摄” -> 截图并转化为文件
+    document.getElementById('btn-snapshot').onclick = function() {
+        const video = document.getElementById('custom-camera-video');
+        const canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        // 把视频画面画到画布上（此时照片只存在于内存，没有保存到手机相册！）
+        canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        // 关闭摄像头释放资源
+        if (cameraStream) cameraStream.getTracks().forEach(track => track.stop());
+        document.getElementById('custom-camera-modal').style.display = "none";
+
+        // 将画布内容转为 File 对象
+        canvas.toBlob(function(blob) {
+            const file = new File([blob], "camera_shot.jpg", { type: "image/jpeg" });
+            
+            // ⭐ 关键一步：把文件塞回你原本的 input 里，并触发原有的聊天发送逻辑！
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            nativeInput.files = dataTransfer.files;
+            
+            // 手动触发原本的 change 事件，让原作者的代码以为用户刚刚从相册选好了图
+            const event = new Event('change', { bubbles: true });
+            nativeInput.dispatchEvent(event);
+
+        }, 'image/jpeg', 0.8);
+    };
+
+    // 6. 关闭摄像头
+    document.getElementById('btn-close-camera').onclick = function() {
+        if (cameraStream) cameraStream.getTracks().forEach(track => track.stop());
+        document.getElementById('custom-camera-modal').style.display = "none";
+    };
+});
+</script>
 <body>
   <!-- 开屏加载动画 -->
   <div class="splash" id="splash">
