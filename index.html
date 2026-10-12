@@ -10561,6 +10561,85 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 });
 </script>
+<!-- Supabase 云同步模块 -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+(async function() {
+    // ⚠️⚠️⚠️ 这里填入你自己的钥匙，千万别照抄我的占位符！
+    const SUPABASE_URL = 'https://lrqopfptkxyajaesfibj.supabase.co'; 
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxycW9mcGZ0a3h5YWphZXNmaWJqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTE4MDQ4MjIsImV4cCI6MjEwNzM4MDgyMn0.Mhr3FIiC10_5LXwAUlXwsVZx09sd86Iqx-mhQCgJjok'; 
+
+    // 初始化云端
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    // 1. 网页启动时：延迟2秒（等本地IDB准备好），去云端拉取数据合并到本地
+    setTimeout(async () => {
+        try {
+            console.log('开始从云端同步数据...');
+            const { data, error } = await supabase.from('mochi_data').select('*');
+            if (error) throw error;
+            
+            if (data && data.length > 0) {
+                for (let row of data) {
+                    const localVal = await window.idbGet(row.id);
+                    // 如果本地没有这个数据，就把云端的写进来
+                    if (localVal === undefined || localVal === null) {
+                        await window.idbSet(row.id, row.payload);
+                        console.log('从云端恢复了一个键:', row.id);
+                    }
+                }
+            }
+            console.log('云端数据同步完成！');
+        } catch (e) {
+            console.error('云同步拉取失败，不影响本地使用：', e);
+        }
+    }, 2000);
+
+    // 2. 拦截本地写入：只要本地写数据，就偷偷上传一份到云端
+    // 等待 idb.js 挂载完成
+    setTimeout(() => {
+        if (!window.idbSet) return;
+        const originalSet = window.idbSet;
+        window.idbSet = async function(key, value) {
+            // 先保留原作者的本地写入逻辑
+            const res = await originalSet(key, value);
+            // 再异步上传到云端（不阻塞界面，失败也不影响本地）
+            try {
+                await supabase.from('mochi_data').upsert({ 
+                    id: key, 
+                    payload: value,
+                    updated_at: new Date().toISOString()
+                });
+            } catch (e) {
+                console.log('云端上传失败，数据已存在本地:', e);
+            }
+            return res;
+        };
+    }, 2000);
+
+    // 3. 拦截全量替换（导入备份时）
+    setTimeout(() => {
+        if (!window.idbReplaceAll) return;
+        const originalReplaceAll = window.idbReplaceAll;
+        window.idbReplaceAll = async function(entries) {
+            const res = await originalReplaceAll(entries);
+            try {
+                // 全量覆盖云端
+                const upsertData = entries.filter(e => e && e.k && e.v !== null).map(e => ({
+                    id: e.k, payload: e.v, updated_at: new Date().toISOString()
+                }));
+                if (upsertData.length > 0) {
+                    await supabase.from('mochi_data').upsert(upsertData);
+                }
+            } catch (e) {
+                console.log('云端全量覆盖失败:', e);
+            }
+            return res;
+        };
+    }, 2000);
+
+})();
+</script>
 <body>
   <!-- 开屏加载动画 -->
   <div class="splash" id="splash">
