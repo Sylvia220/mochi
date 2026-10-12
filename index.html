@@ -36,6 +36,18 @@
     justify-content: center !important; /* 关键：让剩下的图标居中 */
     gap: 16px !important; /* 调整图标之间的间距 */
 }
+/* 让第二页剩下的图标居中 */
+[data-desk-widget="p2apps"] {
+    justify-content: center !important; /* 让它们横向居中 */
+    align-content: center !important;   /* 让它们纵向居中 */
+    margin-top: 20px !important;        /* 增加一点顶部间距 */
+}
+/* 第三页图标居中对齐 */
+[data-desk-widget="p3apps"] {
+    justify-content: center !important; /* 横向居中 */
+    align-content: center !important;   /* 纵向居中 */
+    gap: 16px !important;               /* 统一间距 */
+}
 * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
 :root {
 color-scheme:only light;
