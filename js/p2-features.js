@@ -4193,9 +4193,8 @@ if (!waterPage.hidden) waterRender();
 //if (!pomoPage.hidden) pomoRender();
 //if (!piggyPage.hidden) piggyRender();
 });
-} catch (e) { console.log("p2-features 忽略内部错误", e); }
-})();
 (function () {
+return;
 let lastTa = null;
 let settledTa = null; // 上次抓包结算基线（fish-total-ta）；只随抓包推进，浮字未点不结算
 const FISH_NOTE_FALLBACK = ['ta在那边也偷了个懒'];
