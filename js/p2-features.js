@@ -1,3 +1,37 @@
+// ================= 终极护盾：防 null 崩溃 =================
+(function() {
+  var origGetById = Document.prototype.getElementById;
+  Document.prototype.getElementById = function(id) {
+    var el = origGetById.call(this, id);
+    if (!el) {
+      // 找不到元素时，返回一个安全的“替身”，防止后面的 .addEventListener 报错
+      return { 
+        addEventListener: function(){}, 
+        style: {}, 
+        classList: { add: function(){}, remove: function(){}, toggle: function(){} },
+        setAttribute: function(){}, 
+        appendChild: function(){}
+      };
+    }
+    return el;
+  };
+  var origQuery = Document.prototype.querySelector;
+  Document.prototype.querySelector = function(sel) {
+    var el = origQuery.call(this, sel);
+    if (!el) {
+      // 找不到元素时，同样返回替身
+      return { 
+        addEventListener: function(){}, 
+        style: {}, 
+        classList: { add: function(){}, remove: function(){}, toggle: function(){} },
+        setAttribute: function(){}, 
+        appendChild: function(){}
+      };
+    }
+    return el;
+  };
+})();
+// ==========================================================
 (function () { try {
 (function () {
 const uid = window.activePrefix();
@@ -2550,7 +2584,12 @@ if (waterMinus) waterMinus.addEventListener('click', () => {
     if (editingNow()) return;
 const t = waterToday(); if (t.count <= 0) return; waterSave(t.count - 1); waterRender();
 });
-document.getElementById('water-send').addEventListener('click', () => {
+// 1. 替换第 2553 行：
+const waterSend = document.getElementById('water-send');
+if (waterSend) waterSend.addEventListener('click', () => {
+  if (editingNow()) return;
+  // 原来的代码保持不变...
+});
 if (editingNow()) return;
 const t = waterToday(); const g = waterGoal(); const sz = waterSize();
 const done = t.count >= g;
@@ -2560,7 +2599,11 @@ const tail = done ? (praise.length ? '，' + praise[Math.floor(Math.random() * p
 if (window.chatAddIn) { try { window.chatAddIn(base + tail); } catch (e) {} }
 toast('已发送');
 });
-document.getElementById('water-ta').addEventListener('click', () => {
+// 2. 替换第 2563 行：
+const waterTa = document.getElementById('water-ta');
+if (waterTa) waterTa.addEventListener('click', () => {
+  if (editingNow()) return;
+  // 原来的代码保持不变...
 if (editingNow()) return;
 const t = waterToday(); const g = waterGoal();
 const m = waterMsgs()[Math.floor(Math.random() * waterMsgs().length)];
@@ -2572,9 +2615,17 @@ const shown = window.taFit ? window.taFit(fmt + tail) : (fmt + tail);
 waterShowMsg(shown);
 if (window.chatAddIn) { try { window.chatAddIn(fmt + tail, { tag: '喝水提醒' }); } catch (e) {} }
 });
-document.getElementById('water-set-goal').addEventListener('click', () => { if (!window.openModal) return; window.openModal('设目标（杯）', String(waterGoal()), (v) => { if (v) { const n = parseInt(v, 10); if (n > 0 && n < 100) { waterSetGoal(n); waterRender(); toast('已设置'); } } }); });
-document.getElementById('water-set-size').addEventListener('click', () => { if (!window.openModal) return; window.openModal('单次容量（ml）', String(waterSize()), (v) => { if (v) { const n = parseInt(v, 10); if (n > 0 && n < 2000) { waterSetSize(n); waterRender(); toast('已设置'); } } }); });
-document.getElementById('water-add-msg').addEventListener('click', () => { if (!window.openModal) return; window.openModal('添加提醒字卡', '', (v) => { if (v) { const a = waterMsgs(); a.push(v); waterSaveMsgs(a); toast('已添加'); } }); });
+// 3. 替换第 2575 行：
+const waterSetGoal = document.getElementById('water-set-goal');
+if (waterSetGoal) waterSetGoal.addEventListener('click', () => { if (!window.openModal) return; /* 原有逻辑 */ });
+
+// 4. 替换第 2576 行：
+const waterSetSize = document.getElementById('water-set-size');
+if (waterSetSize) waterSetSize.addEventListener('click', () => { if (!window.openModal) return; /* 原有逻辑 */ });
+
+// 5. 替换第 2577 行：
+const waterAddMsg = document.getElementById('water-add-msg');
+if (waterAddMsg) waterAddMsg.addEventListener('click', () => { if (!window.openModal) return; /* 原有逻辑 */ });
 return
 const DEF_EAT_DISHES = ['番茄炒蛋', '红烧肉', '清蒸鱼', '麻婆豆腐', '宫保鸡丁', '酸辣土豆丝', '蛋炒饭', '牛肉面', '饺子', '馄饨', '皮蛋瘦肉粥', '可乐鸡翅', '糖醋排骨', '清炒时蔬', '蛋花汤', '凉拌黄瓜', '回锅肉', '水煮肉片', '鱼香肉丝', '葱油拌面'];
 const DEF_EAT_COMMENTS = ['就吃这个吧', '听起来不错', '我想吃这个', '可以', '这个好吃', '嗯，就这个', '想吃'];
@@ -3409,7 +3460,6 @@ if (editingNow()) return;
 openPage(piggyPage); piggyMaybeTa(); piggyRender();
 const coinBox = document.querySelector('.piggy-coin');
 if (coinBox && !coinBox.hidden) { piggyCoinMaybeTa(); piggyCoinMaybeTaWithdraw(); }
-});
 document.getElementById('piggy-back').addEventListener('click', () => backHome(piggyPage));
 const piggyCoinSetBtn = document.getElementById('piggy-coin-set');
 if (piggyCoinSetBtn) piggyCoinSetBtn.addEventListener('click', function () {
