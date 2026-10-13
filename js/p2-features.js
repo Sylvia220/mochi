@@ -2216,14 +2216,14 @@ if (hasLayout && !alreadyInLay && pagesBox) {
 }if (!placed) {
 const p2Grid = document.querySelector('.app-grid.p2-grid');
 const p3g = document.querySelector('.app-grid.p3-grid');
-if (p2Grid) {
-p2Grid.appendChild(tpApp); p2Grid.appendChild(ssApp);
-} else if (p3g) { p3g.appendChild(tpApp); p3g.appendChild(ssApp); }
-if (p3g) { p3g.appendChild(waterApp); p3g.appendChild(eatApp); p3g.appendChild(piggyApp); p3g.appendChild(pomoApp); }
-else if (p2Grid) { p2Grid.appendChild(waterApp); p2Grid.appendChild(eatApp); p2Grid.appendChild(piggyApp); p2Grid.appendChild(pomoApp); }
-try { if (window.applyDeskLayout) window.applyDeskLayout(); } catch (e) {}
+if (p3g) { 
+  p3g.appendChild(waterApp); // 只画喝水
 }
-const DEF_STATUS = ['在听雨', '在看你写东西', '没睡，在发呆', '刚路过你身边', '在想你', '在发呆', '在看你', '在等你看我'];
+else if (p2Grid) { 
+  p2Grid.appendChild(waterApp); // 如果第三页网格不在，就画在第二页
+}
+try { if (window.applyDeskLayout) window.applyDeskLayout(); } catch (e) {}
+}const DEF_STATUS = ['在听雨', '在看你写东西', '没睡，在发呆', '刚路过你身边', '在想你', '在发呆', '在看你', '在等你看我'];
 const tpPage = document.createElement('div');
 tpPage.className = 'page'; tpPage.id = 'page-tongpin'; tpPage.hidden = true;
 tpPage.innerHTML =
@@ -2272,7 +2272,6 @@ if (hint) hint.textContent = '没接住 · 过会儿再敲';
 }
 knockTimer = setTimeout(tpResetKnock, 1400);
 }
-if (tpApp) tpApp.addEventListener('click', () => { if (editingNow()) return; openPage(tpPage); });
 document.getElementById('tp-back').addEventListener('click', () => backHome(tpPage));
 let tpFlowTimer = null;
 function tpPickFade() { const el = document.getElementById('tp-status'); if (!el) { tpPick(); return; } el.classList.add('fade'); setTimeout(() => { tpPick(); el.classList.remove('fade'); }, 400); }
@@ -2348,7 +2347,6 @@ if (area) { const tr = document.createElement('div'); tr.className = 'ss-trace';
 const hint = document.getElementById('ss-hint'); if (hint) hint.textContent = window.taFit ? window.taFit('他刚才碰了你一下') : '他刚才碰了你一下';
 const res = document.getElementById('ss-result'); if (res && txt != null) { res.textContent = '\u201c' + txt + '\u201d'; res.className = 'ss-result reach'; } // #1515 空池不出字
 }
-if (ssApp) ssApp.addEventListener('click', () => { if (editingNow()) return; openPage(ssPage); ssRenderCount(); ssMaybePassive(); });
 document.getElementById('ss-back').addEventListener('click', () => backHome(ssPage));
 onLongPress(document.getElementById('ss-area'), ssTry, 500);
 document.getElementById('ss-add').addEventListener('click', () => { if (!window.openModal) return; window.openModal('添加悄悄话字卡', '', (v) => { if (v) { const a = ssCards(); a.push(v); ssSave(a); toast('已添加'); } }); });
@@ -2786,7 +2784,6 @@ eatAlignWheelToDish(dish);
 return dish + ' · ' + comment;
 }
 let eatLastPick = '';
-if (eatApp) eatApp.addEventListener('click', () => { if (editingNow()) return; eatClearSpin(); eatInitCanvas(); openPage(eatPage); eatRenderCurName(); eatLastPick = eatPick(); eatRenderHistory(); eatRenderRemind(); eatRemindSweep(); });
 document.getElementById('eat-back').addEventListener('click', () => { eatClearSpin(); backHome(eatPage); });
 (function () {
 var de = document.getElementById('eat-dish'); if (!de) return;
@@ -3122,7 +3119,6 @@ pomoIdleAt('focus');
 pomoShowMsg('休息好了，来下一个番茄吧');
 }
 }
-if (pomoApp) pomoApp.addEventListener('click', () => { if (editingNow()) return; openPage(pomoPage); pomoRender(); });
 document.getElementById('pomo-back').addEventListener('click', () => backHome(pomoPage));
 document.getElementById('pomo-start').addEventListener('click', () => {
 if (editingNow()) return;
@@ -3398,7 +3394,6 @@ if (!note) return; // #1515 全关＝彩蛋静默
 vibrate([20, 60, 20]);
 setTimeout(() => { piggyShowMsg(window.taFit ? window.taFit(note + ' ¥' + piggyFmt(amt) + ' · 替TA存进去？') : (note + ' ¥' + piggyFmt(amt) + ' · 替TA存进去？')); }, 400);
 }
-if (piggyApp) piggyApp.addEventListener('click', () => {
 if (editingNow()) return;
 openPage(piggyPage); piggyMaybeTa(); piggyRender();
 const coinBox = document.querySelector('.piggy-coin');
