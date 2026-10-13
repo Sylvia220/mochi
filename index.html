@@ -23,7 +23,8 @@
 <!-- v3.27.x 三档主题的启动落位（#252 收口）：浅色/深色按存储直挂；auto 档此前头部
      脚本只认 dark、系统深色的 auto 用户会先白闪再由 personalize.js 纠正（FOUC）。
      另：旧版本残留的 data-theme 属性在此强制清掉，保证「选浅色」真回浅色。 -->
-<script>try{var _tm=localStorage.getItem('xy-home-v2:theme-mode');if(_tm==='dark'||(_tm!=='light'&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');else document.documentElement.removeAttribute('data-theme');}catch(e){}</script><style></style>
+<script>try{var _tm=localStorage.getItem('xy-home-v2:theme-mode');if(_tm==='dark'||(_tm!=='light'&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');else document.documentElement.removeAttribute('data-theme');}catch(e){}</script>
+<style>
 /* 让第二页剩下的图标居中 */
 [data-desk-widget="p2apps"] {
     justify-content: center !important; /* 让它们横向居中 */
