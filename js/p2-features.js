@@ -2522,22 +2522,32 @@ try { s.set('water-ta-mark:' + waterDayStr(0), '1'); } catch (e) {}
 }
 window.waterDayHas = function (ds) { try { const h = waterHistory(); return (h[ds] || 0) > 0; } catch (e) { return false; } };
 if (waterApp) waterApp.addEventListener('click', () => { if (editingNow()) return; openPage(waterPage); waterRender(); waterMaybeRemind(); });
-document.getElementById('water-back').addEventListener('click', () => backHome(waterPage));
-document.getElementById('water-plus').addEventListener('click', () => {
-if (editingNow()) return;
-const t = waterToday(); const g = waterGoal(); const n = t.count + 1;
-const justDone = t.count < g && n >= g;
-waterSave(n); waterRender();
-if (justDone) {
-vibrate([60, 40, 60]);
-const card = document.querySelector('#page-water .water-card');
-if (card) { card.classList.add('done'); setTimeout(() => card.classList.remove('done'), 900); }
-const p = libPool('water', '喝够夸奖', DEF_WATER_PRAISE); if (p.length) waterShowMsg(p[Math.floor(Math.random() * p.length)]); // #1515 空池不出声
-}
-else if (Math.random() < 0.2) { const e = libPool('water', '继续鼓励', DEF_WATER_ENCOURAGE); if (e.length) waterShowMsg(e[Math.floor(Math.random() * e.length)]); } // #1515 空池不出声
-});
-document.getElementById('water-minus').addEventListener('click', () => {
-if (editingNow()) return;
+// 原来的2525行改成这样：
+const waterBack = document.getElementById('water-back');
+if (waterBack) waterBack.addEventListener('click', () => backHome(waterPage));
+// 原来的2526行改成这样：
+const waterPlus = document.getElementById('water-plus');
+if (waterPlus) waterPlus.addEventListener('click', () => {
+    if (editingNow()) return; // 保留一行即可
+    const t = waterToday(); const g = waterGoal(); const n = t.count + 1;
+    const justDone = t.count < g && n >= g;
+    waterSave(n); waterRender();
+    if (justDone) {
+      vibrate([60, 40, 60]);
+      const card = document.querySelector('#page-water .water-card');
+      if (card) { card.classList.add('done'); setTimeout(() => card.classList.remove('done'), 900); }
+      const p = libPool('water', '喝够夸奖', DEF_WATER_PRAISE); if (p.length) waterShowMsg(p[Math.floor(Math.random() * p.length)]);
+    }
+    else if (Math.random() < 0.2) { 
+      const e = libPool('water', '继续鼓励', DEF_WATER_ENCOURAGE); 
+      // 注意：你原来截图里的这一行下面还有内容，保持它们原样即可
+    }
+  }); // 这里原本是你的 2543 行，闭合 water-plus 的监听器
+
+// 原来的 2544 行（water-minus）加上保护：
+const waterMinus = document.getElementById('water-minus');
+if (waterMinus) waterMinus.addEventListener('click', () => {
+    if (editingNow()) return;
 const t = waterToday(); if (t.count <= 0) return; waterSave(t.count - 1); waterRender();
 });
 document.getElementById('water-send').addEventListener('click', () => {
