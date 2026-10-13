@@ -652,6 +652,7 @@ fdCount(f);
 function refreshPageCount(pageEl) {
 FEATURES.forEach(function (f) {
 if (!f.page || f.page !== pageEl.id) return;
+if (!pageEl || typeof pageEl.querySelector !== 'function') return;
 var el = pageEl.querySelector('[data-fcount="' + f.id + '"]');
 if (!el) return;
 delete el.dataset.done;
