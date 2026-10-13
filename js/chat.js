@@ -6479,30 +6479,6 @@ else if (window.openCkPanel) window.openCkPanel();
 });
 }
 const moreCk = document.getElementById('more-ck');
-if (moreCk) {
-moreCk.addEventListener('click', (e) => {
-e.stopPropagation();
-if (morePanel) morePanel.hidden = true;
-if (window.openCheckinPage) {
-window.__ckFrom = 'chat';
-window.openCheckinPage();
-} else toast('寻踪加载失败');
-});
-}
-const moreCjian = document.getElementById('more-cjian');
-if (moreCjian) {
-moreCjian.addEventListener('click', (e) => {
-e.stopPropagation();
-if (morePanel) morePanel.hidden = true;
-if (window.openCjian) {
-window.__cjianFrom = 'chat';
-try { window.openCjian(); } catch (err) {
-try { if (window.__jsErrors) window.__jsErrors.push('openCjian: ' + (err && err.message || err)); } catch (e2) {}
-toast('此间打开出错，请刷新页面重试');
-}
-} else toast('此间加载失败，请刷新页面重试');
-});
-}
 let lastMineText = '';
 let lastMineIdx = -1;
 let lastMineQuote = '';
@@ -13483,7 +13459,6 @@ lastQuote = null;
 addRec(rec);
 lastSendTxt = t;
 lastSendTs = Date.now();
-try { if (window.cjianNoteChat) window.cjianNoteChat(); } catch (err) {}
 if (window.playSfx) window.playSfx('out');
 clearChatInput();
 draftImgs = [];

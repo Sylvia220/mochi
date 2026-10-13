@@ -212,7 +212,7 @@
   // 管理页（page-custom-cards）功能分类 tab 可查看/编辑/删除，各功能经 default-cards.js
   // getLibPool 并入对应功能池抽取；CC_FUNC_KEYS 不进聊天通用回复池（getCustomCards*
   // 遍历全部分类时排除，防止功能字卡被聊天自动回复误抽）。
-  const CC_FUNC_KEYS = ['fish', 'eat', 'period', 'water', 'garden', 'sync', 'reach', 'cjian', 'room', 'piggy', 'drift', 'interact', 'music',
+  const CC_FUNC_KEYS = ['period', 'water', 'sync', 'reach', 'interact', 'music',
     'mjfree']; // #317 梦角自由造句：程序生成的重造句卡（dream-free.js），管理页可查看/删除，不进聊天通用池
   const CC_ALL_TYPES = CC_TYPES.concat(CC_FUNC_KEYS);
   const CC_FUN_COUNT_KEYS = CC_FUNC_KEYS.filter(k => k !== 'mjfree');
@@ -2627,9 +2627,8 @@
     const EXPORT_CATS = [
       ['text', '主字卡'], ['kaomoji', '颜文字'], ['emoji', 'emoji'],
       ['sticker', '表情包'], ['image', '图片'], ['poke', '拍一拍'], ['voice', '语音'],
-      ['fish', '摸鱼'], ['eat', '吃饭'], ['period', '经期'], ['water', '喝水'], ['garden', '花园'],
-      ['sync', '同频'], ['reach', '伸手'], ['cjian', '此间'], ['room', '房间'], ['piggy', '存钱罐'],
-      ['drift', '漂流瓶'], ['interact', '互动回应'], ['music', '音乐'],
+      ['period', '经期'], ['water', '喝水'],
+      ['interact', '互动回应'], ['music', '音乐'],
       // FIX 2026-09-30 #1483：补「梦角自由造句」分类——#353 起 mjfree 卡就存公用/专属两库
       // （管理页有 tab、dream-free 自动入库），导出弹窗却没有这一栏＝造句卡永远导不出去
       ['mjfree', '梦角自由造句']
@@ -2757,7 +2756,7 @@
   // 文件先完整解析、确认含有效字卡后才写入：格式错误/空文件不会改动现有字卡库
   const ccImportData = document.getElementById('cc-import-data');
   if (ccImportData) {
-    const CAT_NAMES = { text: '主字卡', kaomoji: '颜文字', emoji: 'emoji', sticker: '表情包', image: '图片', poke: '拍一拍', voice: '语音', fish: '摸鱼', eat: '吃饭', period: '经期', water: '喝水', garden: '花园', sync: '同频', reach: '伸手', cjian: '此间', room: '房间', piggy: '存钱罐', drift: '漂流瓶', interact: '互动回应', music: '音乐', mjfree: '梦角自由造句' };
+    const CAT_NAMES = { text: '主字卡', kaomoji: '颜文字', emoji: 'emoji', sticker: '表情包', image: '图片', poke: '拍一拍', voice: '语音',  period: '经期', water: '喝水', interact: '互动回应', music: '音乐', mjfree: '梦角自由造句' };
     ccImportData.addEventListener('click', () => {
       if (window.openModal) {
         const curName = CAT_NAMES[cur] || '当前分类';
@@ -3296,7 +3295,7 @@
   // （摸鱼/吃饭 等 13 类）再拆一个独立导出档——很多人不用这些功能，聊天字卡导出不再夹带，
   // 只在「互动功能字卡」档导出它们；全量档仍含全部（老文件兼容）。
   // 13 类互动功能分类 key（与分类 tab / EXPORT_CATS 一致）；辅助函数放公共区（导入侧 ccFullApply 也用）
-  const CC_FULL_FUN_TYPES = ['fish', 'eat', 'period', 'water', 'garden', 'sync', 'reach', 'cjian', 'room', 'piggy', 'drift', 'interact', 'music'];
+  const CC_FULL_FUN_TYPES = ['period', 'water', 'interact', 'music'];
   // 从 cc 对象里挑出指定分类（挑互动=只留 13 类；挑聊天=剔掉 13 类），分组停用开关同口径过滤
   function ccFullPickCc(o, keepFun) {
     const out = {};

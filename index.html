@@ -24,11 +24,6 @@
      脚本只认 dark、系统深色的 auto 用户会先白闪再由 personalize.js 纠正（FOUC）。
      另：旧版本残留的 data-theme 属性在此强制清掉，保证「选浅色」真回浅色。 -->
 <script>try{var _tm=localStorage.getItem('xy-home-v2:theme-mode');if(_tm==='dark'||(_tm!=='light'&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.setAttribute('data-theme','dark');else document.documentElement.removeAttribute('data-theme');}catch(e){}</script>
-<style>
-.app[data-app="eat"] { display: none !important; }
-.app[data-app="piggy"] { display: none !important; }
-.app[data-app="tongpin"] { display: none !important; }
-.app[data-app="shenshou"] { display: none !important; }
 /* 让第二页剩下的图标居中 */
 [data-desk-widget="p2apps"] {
     justify-content: center !important; /* 让它们横向居中 */
@@ -11260,17 +11255,6 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="mc-top">本周日常</div>
 <div class="week-days" id="week-days"></div>
 </div>
-<!-- 离周末还有几天（点击摸鱼 +1，可累计）
-     v3.15.x：标题与副题合并同一行（.we-top），整卡与首页打卡横幅同档高度 
-<div class="weekend-box glass" id="weekend-box" data-desk-widget="weekend" data-card-bg="weekend">
-<div class="we-left">
-<span class="we-top"><span class="we-days" id="weekend-days">离周末还有 0 天</span><span class="we-sub">距离周末 · 摸鱼倒计时</span></span>
-<span class="we-ta" id="weekend-ta-name"><span class="pair"><i>TA 摸鱼值</i><b id="weekend-ta">0</b></span><span class="pair"><i>TA 工作值</i><b id="weekend-work-ta">0</b></span></span>
-<span class="we-ta" id="weekend-mine-name"><span class="pair"><i>我 摸鱼值</i><b id="weekend-mine">0</b></span><span class="pair"><i>我 工作值</i><b id="weekend-work">0</b></span></span>
-</div>
-<button class="we-btn" id="weekend-fish" title="摸鱼 +1">摸鱼 +<b id="weekend-count">0</b></button>
-</div> -->
-
 <!-- 第二页功能：两排图标（第一排 音乐/聊天统计/提问记录/寻踪；第二排 花园/此间/同频(注入)/伸手(注入)；
      喝水已移至第三页 p3-grid（p2-features 注入）），整组移到摸鱼组件（周末倒计时）下面 -->
 <div class="app-grid p2-grid" data-app="p2" data-desk-widget="p2apps">
@@ -11978,56 +11962,6 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
 </div>
 
-<!-- TA在身边位置卡（字卡库：方位/距离/状态/感知/彩蛋，位置面板词源） -->
-<div class="page" id="page-loc-cards" hidden>
-  <div class="chat-head">
-    <span class="ch-back" id="loc-cards-back">
-      <svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-    </span>
-    <span class="ch-name">TA在身边位置卡</span>
-  </div>
-  <div class="gs-scroll">
-    <div class="set-group glass">
-      <div class="gs-row"><span>使用系统预设位置卡</span><label class="toggle"><input type="checkbox" id="loc-default" checked><span class="tk"></span></label></div>
-    </div>
-    <div class="cal-card-title" style="padding:0 14px 2px">TA 想告诉你的位置（发送字卡）</div>
-    <div class="fav-tabs">
-      <button class="fav-tab sel" data-loctab="dir"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px"><path d="M12 21s-6-5.3-6-10a6 6 0 1112 0c0 4.7-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg>方位</button>
-      <button class="fav-tab" data-loctab="dist"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px"><circle cx="12" cy="12" r="9"/><path d="M12 12l3-3"/></svg>距离</button>
-      <button class="fav-tab" data-loctab="state"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px"><path d="M13 2L4.5 13.5H11l-1 8.5L18.5 10H12l1-8z"/></svg>状态</button>
-      <button class="fav-tab" data-loctab="sense"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>感知</button>
-      <button class="fav-tab" data-loctab="egg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px"><path d="M12 3c4 5 6 8 6 11a6 6 0 11-12 0c0-3 2-6 6-11z"/></svg>彩蛋</button>
-    </div>
-    <div class="cal-card-title" style="padding:8px 14px 2px">你的感知（方位感知 · 不是精确定位）</div>
-    <div class="fav-tabs">
-      <button class="fav-tab" data-loctab="direct"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px"><path d="M12 3l3.5 3.5L12 10l-3.5-3.5z"/><path d="M12 3v18M12 10v11"/></svg>方向</button>
-      <button class="fav-tab" data-loctab="rangef"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/></svg>距离感</button>
-      <button class="fav-tab" data-loctab="power"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px"><path d="M12 3v4M12 17v4M3 12h4M17 12h4"/><circle cx="12" cy="12" r="2.5"/></svg>感知强度</button>
-      <button class="fav-tab" data-loctab="touch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:13px;height:13px;vertical-align:-2px;margin-right:3px"><path d="M8 14.5V7.2a1.5 1.5 0 0 1 3 0v7.3"/><path d="M11 14.5V6.5a1.5 1.5 0 0 1 3 0v8"/><path d="M14 14.5V7.8a1.5 1.5 0 0 1 3 0v6.7"/><path d="M6.5 14.5h12c0 3.5-2.7 6-6 6s-6-2.5-6-6"/><path d="M6 5a8.5 8.5 0 0 1 12 0"/></svg>触碰</button>
-    </div>
-    <div class="card-tabs" id="loc-tabs" style="padding:6px 12px 8px">
-      <button class="cc-tab sel" data-tab="sys">系统预设</button>
-      <button class="cc-tab" data-tab="mine">我的添加</button>
-    </div>
-    <div class="set-group glass" id="loc-sys-panel">
-      <div class="cal-card-title" style="padding:14px 14px 0" id="cloc-sys-title">方位</div>
-      <div id="cloc-sys-list" style="padding:8px 14px 14px"></div>
-    </div>
-    <div class="set-group glass" id="loc-mine-panel" hidden>
-      <div class="cal-card-title" style="padding:14px 14px 0;display:flex;align-items:center;justify-content:space-between"><span>批量输入位置卡</span><button class="cc-tool" id="loc-new-grp" style="padding:4px 8px;font-size:11px">＋ 分组</button></div>
-      <div class="tc-addform">
-        <select id="cloc-batch-grp" class="tc-input"></select>
-        <textarea id="cloc-batch" class="tc-input" rows="6" placeholder="每行一个，如：&#10;在咖啡店等你&#10;在回家的路上&#10;在你看不到的地方"></textarea>
-        <button class="ta-add-btn" style="width:100%" id="cloc-batch-add">添加到我的位置卡</button>
-      </div>
-      <div class="cal-card-title" style="padding:14px 14px 0" id="cloc-mine-title">我的位置卡</div>
-      <div id="cloc-mine-list" style="padding:8px 14px 14px"></div>
-    </div>
-    <div class="cal-card-title" style="padding:0 2px">TA 想告诉你 TA 在哪时，会从上面的发送字卡里选（发出后有光点动效）；方位感知用的是下面的感知字卡</div>
-    <div class="cal-card-title" style="padding:4px 2px 0">光点落在哪儿＝TA 在哪儿：方位卡（在你左边 / 右边 / 身后 / 前面）落在画面对应方向；距离卡与状态卡跟着<b>最近一张方位卡</b>的方位走——「再近一点」朝屏幕中心靠近，「再远一点」朝屏幕边缘再退开。所以上一张说的是「在你右边」，接着发「再远一点」时，光点会出现在屏幕右侧靠边处，这是正常的（不是跑偏）。</div>
-  </div>
-</div>
-
 <!-- 通用回答弹层（TA的好奇 / TA的吐槽 共用） -->
 <div class="qa-mask" id="qa-mask" hidden>
   <div class="qa-panel">
@@ -12098,17 +12032,8 @@ document.addEventListener("DOMContentLoaded", function () {
         <!-- v3.32.x：其他互动功能字卡（自定义）——与系统预设【其他互动功能字卡】同分类，
              用户自建的功能字卡存本作用域 cc-groups 同名字段，各功能经 getLibPool 并入抽取；
              13 个功能 tab 仅「其他互动功能字卡」入口显示，公用/专属入口隐藏（openCcPage 按入口切换） -->
-        <button class="cc-tab" data-type="fish">摸鱼</button>
-        <button class="cc-tab" data-type="eat">吃饭</button>
         <button class="cc-tab" data-type="period">经期</button>
         <button class="cc-tab" data-type="water">喝水</button>
-        <button class="cc-tab" data-type="garden">花园</button>
-        <button class="cc-tab" data-type="sync">同频</button>
-        <button class="cc-tab" data-type="reach">伸手</button>
-        <button class="cc-tab" data-type="cjian">此间</button>
-        <button class="cc-tab" data-type="room">房间</button>
-        <button class="cc-tab" data-type="piggy">存钱罐</button>
-        <button class="cc-tab" data-type="drift">漂流瓶</button>
         <button class="cc-tab" data-type="interact">互动回应</button>
         <button class="cc-tab" data-type="music">音乐</button>
         <!-- #317 梦角自由造句：程序生成（梦角说话截字重造句自动入库），这里可查看/删除 -->
@@ -14012,22 +13937,11 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="gs-sub">这两类只有「用不用系统预设」的开关、没有概率，不受总档缩放；关闭后分别只从你自己添加的情话/位置话术里出。</div>
             <div class="gs-row" id="dcp-fun-expander-row" style="cursor:pointer"><span>其他互动功能字卡（19 个分类 · 点此展开 / 收起）</span><span id="dcp-fun-expander-arrow">▾</span></div>
             <div id="dcp-fun-box" hidden>
-              <div class="gs-row"><span>摸鱼字卡概率</span><div class="stepper" id="dcf-prob-fish-rs" data-dcfkey="fish" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-fish-rs-val" readonly><button class="stp-max">+</button></div></div>
-              <div class="gs-row"><span>吃饭字卡概率</span><div class="stepper" id="dcf-prob-eat-rs" data-dcfkey="eat" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-eat-rs-val" readonly><button class="stp-max">+</button></div></div>
               <div class="gs-row"><span>经期字卡概率</span><div class="stepper" id="dcf-prob-period-rs" data-dcfkey="period" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-period-rs-val" readonly><button class="stp-max">+</button></div></div>
               <div class="gs-row"><span>喝水字卡概率</span><div class="stepper" id="dcf-prob-water-rs" data-dcfkey="water" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-water-rs-val" readonly><button class="stp-max">+</button></div></div>
-              <div class="gs-row"><span>花园字卡概率</span><div class="stepper" id="dcf-prob-garden-rs" data-dcfkey="garden" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-garden-rs-val" readonly><button class="stp-max">+</button></div></div>
-              <div class="gs-row"><span>同频字卡概率</span><div class="stepper" id="dcf-prob-sync-rs" data-dcfkey="sync" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-sync-rs-val" readonly><button class="stp-max">+</button></div></div>
-              <div class="gs-row"><span>伸手字卡概率</span><div class="stepper" id="dcf-prob-reach-rs" data-dcfkey="reach" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-reach-rs-val" readonly><button class="stp-max">+</button></div></div>
-              <div class="gs-row"><span>此间字卡概率</span><div class="stepper" id="dcf-prob-cjian-rs" data-dcfkey="cjian" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-cjian-rs-val" readonly><button class="stp-max">+</button></div></div>
-              <div class="gs-row"><span>房间字卡概率</span><div class="stepper" id="dcf-prob-room-rs" data-dcfkey="room" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-room-rs-val" readonly><button class="stp-max">+</button></div></div>
-              <div class="gs-row"><span>存钱罐字卡概率</span><div class="stepper" id="dcf-prob-piggy-rs" data-dcfkey="piggy" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-piggy-rs-val" readonly><button class="stp-max">+</button></div></div>
-              <div class="gs-row"><span>漂流瓶字卡概率</span><div class="stepper" id="dcf-prob-drift-rs" data-dcfkey="drift" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-drift-rs-val" readonly><button class="stp-max">+</button></div></div>
               <div class="gs-row"><span>互动回应字卡概率</span><div class="stepper" id="dcf-prob-interact-rs" data-dcfkey="interact" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-interact-rs-val" readonly><button class="stp-max">+</button></div></div>
               <div class="gs-row"><span>音乐字卡概率</span><div class="stepper" id="dcf-prob-music-rs" data-dcfkey="music" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-music-rs-val" readonly><button class="stp-max">+</button></div></div>
               <div class="gs-row"><span>跨桌面查岗字卡概率</span><div class="stepper" id="dcf-prob-deskcheck-rs" data-dcfkey="deskcheck" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-deskcheck-rs-val" readonly><button class="stp-max">+</button></div></div>
-              <div class="gs-row"><span>寻踪日常字卡概率</span><div class="stepper" id="dcf-prob-checkin-rs" data-dcfkey="checkin" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-checkin-rs-val" readonly><button class="stp-max">+</button></div></div>
-              <div class="gs-row"><span>番茄钟字卡概率</span><div class="stepper" id="dcf-prob-pomo-rs" data-dcfkey="pomo" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-pomo-rs-val" readonly><button class="stp-max">+</button></div></div>
               <div class="gs-row"><span>TA的关心（经期）字卡概率</span><div class="stepper" id="dcf-prob-care-rs" data-dcfkey="care" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-care-rs-val" readonly><button class="stp-max">+</button></div></div>
               <div class="gs-row"><span>备忘提醒字卡概率</span><div class="stepper" id="dcf-prob-memo-rs" data-dcfkey="memo" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-memo-rs-val" readonly><button class="stp-max">+</button></div></div>
               <div class="gs-row"><span>TA主动提问字卡概率</span><div class="stepper" id="dcf-prob-ask-rs" data-dcfkey="ask" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-ask-rs-val" readonly><button class="stp-max">+</button></div></div>
@@ -14598,23 +14512,10 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="gs-row" id="dcf-prob-expander-row" style="cursor:pointer"><span>各功能使用概率调节（点此展开 / 收起）</span><span id="dcf-prob-expander-arrow">▾</span></div>
       </div>
       <div class="set-group glass" id="dcf-prob-box" hidden style="margin:0 12px 0">
-        <div class="gs-row"><span>摸鱼字卡概率</span><div class="stepper" id="dcf-prob-fish" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-fish-val" readonly><button class="stp-max">+</button></div></div>
-        <div class="gs-row"><span>吃饭字卡概率</span><div class="stepper" id="dcf-prob-eat" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-eat-val" readonly><button class="stp-max">+</button></div></div>
         <div class="gs-row"><span>经期字卡概率（温柔前缀/动作/经期关心）</span><div class="stepper" id="dcf-prob-period" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-period-val" readonly><button class="stp-max">+</button></div></div>
         <div class="gs-row"><span>喝水字卡概率</span><div class="stepper" id="dcf-prob-water" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-water-val" readonly><button class="stp-max">+</button></div></div>
-        <div class="gs-row"><span>花园字卡概率</span><div class="stepper" id="dcf-prob-garden" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-garden-val" readonly><button class="stp-max">+</button></div></div>
-        <div class="gs-row"><span>同频字卡概率</span><div class="stepper" id="dcf-prob-sync" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-sync-val" readonly><button class="stp-max">+</button></div></div>
-        <div class="gs-row"><span>伸手字卡概率</span><div class="stepper" id="dcf-prob-reach" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-reach-val" readonly><button class="stp-max">+</button></div></div>
-        <div class="gs-row"><span>此间字卡概率</span><div class="stepper" id="dcf-prob-cjian" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-cjian-val" readonly><button class="stp-max">+</button></div></div>
-        <div class="gs-row"><span>房间字卡概率</span><div class="stepper" id="dcf-prob-room" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-room-val" readonly><button class="stp-max">+</button></div></div>
-        <div class="gs-row"><span>存钱罐字卡概率</span><div class="stepper" id="dcf-prob-piggy" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-piggy-val" readonly><button class="stp-max">+</button></div></div>
-        <div class="gs-row"><span>漂流瓶字卡概率</span><div class="stepper" id="dcf-prob-drift" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-drift-val" readonly><button class="stp-max">+</button></div></div>
         <div class="gs-row"><span>互动回应字卡概率</span><div class="stepper" id="dcf-prob-interact" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-interact-val" readonly><button class="stp-max">+</button></div></div>
         <div class="gs-row"><span>音乐字卡概率</span><div class="stepper" id="dcf-prob-music" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-music-val" readonly><button class="stp-max">+</button></div></div>
-        <!-- v3.42.x #422：寻踪日常推送 / 番茄钟完成消息——只读式「发到聊天」概率门控，无独立字卡池，
-             不参与上方案引卡管理；0%=不进聊天，100%=原行为。功能说明标签由 default-cards.js 注入。 -->
-        <div class="gs-row"><span>寻踪日常发送到聊天</span><div class="stepper" id="dcf-prob-checkin" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-checkin-val" readonly><button class="stp-max">+</button></div></div>
-        <div class="gs-row"><span>番茄钟完成发到聊天</span><div class="stepper" id="dcf-prob-pomo" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-pomo-val" readonly><button class="stp-max">+</button></div></div>
         <!-- v3.42.x #422：TA的关心（经期）——在经期页「梦角关心」按钮之外追加一层概率门控，
              0%=不发关心，100%=只按经期页原节奏；「梦角关心」按钮本身不受本概率影响。 -->
         <div class="gs-row"><span>TA的关心（经期）</span><div class="stepper" id="dcf-prob-care" data-min="0" data-max="100" data-step="5"><button class="stp-min">−</button><input class="stp-val" id="dcf-prob-care-val" readonly><button class="stp-max">+</button></div></div>
@@ -14625,17 +14526,8 @@ document.addEventListener("DOMContentLoaded", function () {
            v3.42.x #444：概率框移回页顶但默认折叠（用户报「概率位置太靠后看不到」）——首屏仍是
            字卡列表，fc 页整页滚动规则（chat-pages.css #239）保证展开后列表不被 flex 压扁。 -->
       <div class="card-tabs" id="fc-tabs">
-        <button class="cc-tab sel" data-type="fish">摸鱼</button>
-        <button class="cc-tab" data-type="eat">吃饭</button>
         <button class="cc-tab" data-type="period">经期</button>
         <button class="cc-tab" data-type="water">喝水</button>
-        <button class="cc-tab" data-type="garden">花园</button>
-        <button class="cc-tab" data-type="sync">同频</button>
-        <button class="cc-tab" data-type="reach">伸手</button>
-        <button class="cc-tab" data-type="cjian">此间</button>
-        <button class="cc-tab" data-type="room">房间</button>
-        <button class="cc-tab" data-type="piggy">存钱罐</button>
-        <button class="cc-tab" data-type="drift">漂流瓶</button>
         <button class="cc-tab" data-type="interact">互动回应</button>
         <button class="cc-tab" data-type="music">音乐</button>
       </div>
@@ -16218,83 +16110,6 @@ document.addEventListener("DOMContentLoaded", function () {
           </div>
         </div>
       </div>
-      <!-- 双人钓鱼：聊天页底部半框（你与 TA 各一根鱼竿，时机收竿 → 今日收获 → 出售心意币 + 图鉴 + TA送礼+陪伴奖励） -->
-      <div class="poke-card" id="chat-fish-panel" hidden>
-        <div class="poke-card-head">
-          <span>钓鱼 · <b id="fish-partner-name">TA</b></span>
-          <div class="snake-head-actions">
-            <button class="snake-icon-btn" id="fish-sound" title="音效开关">🔊</button>
-                        <button class="snake-icon-btn" id="fish-fs" title="全屏">⛶</button>
-<button class="poke-card-close fish-close" id="fish-close">✕</button>
-          </div>
-        </div>
-        <div class="poke-card-scroll">
-          <div class="fish-wrap">
-            <div class="fish-scene" id="fish-scene" data-mine="idle" data-ta="idle">
-              <div class="fish-sky"></div>
-              <div class="fish-persons">
-                <div class="fish-person fish-me">
-                  <div class="fish-rod"></div>
-                  <span class="fish-person-name">你</span>
-                </div>
-                <div class="fish-person fish-ta">
-                  <span class="fish-ta-state" id="fish-ta-state">待着</span>
-                  <div class="fish-rod"></div>
-                  <span class="fish-person-name">TA</span>
-                </div>
-              </div>
-              <div class="fish-water"></div>
-            </div>
-            <div class="fish-status" id="fish-status"></div>
-            <div class="fish-timing-wrap" id="fish-timing-wrap" hidden>
-              <div class="fish-timing-label">鱼漂变蓝晃动了 · 光标进蓝区收竿最佳</div>
-              <div class="fish-timing-bar" id="fish-timing-bar"><span class="fish-timing-good"></span><span class="fish-timing-cursor" id="fish-timing-cursor"></span></div>
-            </div>
-            <div class="fish-actions">
-              <button class="fish-btn" id="fish-cast" type="button">抛竿</button>
-              <button class="fish-btn fish-reel" id="fish-reel" type="button" hidden>收竿</button>
-            </div>
-            <div class="fish-tabs">
-              <button class="fish-tab sel" data-ftab="today" type="button">今日收获</button>
-              <button class="fish-tab" data-ftab="dex" type="button">鱼图鉴</button>
-              <button class="fish-tab" data-ftab="gifts" type="button">TA送我的</button>
-            </div>
-            <div class="fish-page" id="fish-page"></div>
-          </div>
-        </div>
-      </div>
-      <!-- 四子棋：聊天页底部半框（经典 7×6 落子棋盘，梦角由代码控制、每回合行为状态随机） -->
-      <div class="poke-card" id="chat-c4-panel" hidden>
-        <div class="poke-card-head">
-          <span>四子棋 · <b id="c4-partner-name">TA</b></span>
-          <div class="snake-head-actions">
-            <button class="snake-icon-btn" id="c4-sound" title="音效开关">🔊</button>
-            <button class="snake-icon-btn" id="c4-fs" title="全屏">⛶</button>            <button class="poke-card-close" id="c4-close">✕</button>
-          </div>
-        </div>
-        <div class="poke-card-scroll">
-          <div class="c4-wrap">
-            <div class="c4-players">
-              <span class="c4-side">🔵 你</span>
-              <span class="c4-vs">VS</span>
-              <span class="c4-side">🟡 <span id="c4-side-name">TA</span></span>
-            </div>
-            <div class="c4-stage" id="c4-stage">
-              <div class="c4-board" id="c4-board"></div>
-              <div class="pong-overlay c4-overlay" id="c4-overlay" hidden>
-                <div class="pong-overlay-title" id="c4-ov-title">四子棋</div>
-                <div class="pong-overlay-body" id="c4-ov-body"></div>
-                <div class="pong-overlay-btns">
-                  <button class="pong-overlay-btn" id="c4-btn-start" type="button">开始对局</button>
-                  <button class="pong-overlay-btn pong-overlay-btn2" id="c4-btn-end" type="button" hidden>结束游戏</button>
-                </div>
-              </div>
-            </div>
-            <div class="c4-status" id="c4-status">点击「开始对局」</div>
-            <div class="pong-foot">轮流落子 · 先连成四子的一方获胜 · TA今天的状态是随机的</div>
-          </div>
-        </div>
-      </div>
       <!-- 合作扫雷：聊天页底部半框（和 TA 轮流探索一张雷区，共用 ❤️❤️❤️，踩雷不即死） -->
       <div class="poke-card" id="chat-ms-panel" hidden>
         <div class="poke-card-head">
@@ -16478,127 +16293,6 @@ document.addEventListener("DOMContentLoaded", function () {
           </div>
         </div>
       </div>
-      <!-- 心意币拍卖会：聊天页底部半框（和 TA 轮番举牌竞拍，落槌价真扣心意币，拍品收进🎒） -->
-      <div class="poke-card" id="chat-auction-panel" hidden>
-        <div class="poke-card-head">
-          <span>心意币拍卖会 · <b id="au-partner-name">TA</b></span>
-          <div class="snake-head-actions">
-            <button class="snake-icon-btn" id="au-help-btn" title="怎么玩（玩法说明）">❓</button>
-            <button class="snake-icon-btn" id="au-bag" title="拍品收藏">🎒</button>
-            <button class="snake-icon-btn" id="au-sound" title="音效开关">🔊</button>
-            <button class="snake-icon-btn" id="au-history" title="拍卖记录">📜</button>
-            <button class="snake-icon-btn" id="au-add" title="自制拍品">➕</button>
-            <button class="snake-icon-btn" id="au-fs" title="全屏">⛶</button>            <button class="poke-card-close" id="au-close">✕</button>
-          </div>
-        </div>
-        <div class="poke-card-scroll">
-          <div class="au-wrap">
-            <div class="au-topbar"><span id="au-lot">每场 3 件拍品</span><span class="au-balance" id="au-balance">心意币 —</span></div>
-            <div class="au-stage" id="au-stage">
-              <div class="au-item" id="au-item"></div>
-              <div class="pong-overlay au-overlay" id="au-overlay" hidden>
-                <div class="pong-overlay-title" id="au-ov-title">心意币拍卖会</div>
-                <div class="pong-overlay-body" id="au-ov-body"></div>
-                <div class="pong-overlay-btns">
-                  <button class="pong-overlay-btn" id="au-btn-start" type="button">开场拍卖</button>
-                  <button class="pong-overlay-btn pong-overlay-btn2" id="au-btn-end" type="button" hidden>收摊</button>
-                </div>
-              </div>
-              <div class="pong-overlay au-overlay" id="au-help" hidden>
-                <div class="pong-overlay-title">怎么玩 · 拍卖会</div>
-                <div class="au-help-body">
-                  <b>①&nbsp;看拍品</b>：每件都有起拍价，先看它值多少。<br>
-                  <b>②&nbsp;出价</b>：点一个“出 ¥X”档位＝在当前价上加一档，压上你的价（按钮会直接显示你要出的钱）。<br>
-                  <b>③&nbsp;轮替</b>：你出价后 TA 会掂量掂量——跟价或放弃，轮到你时按钮才亮起。<br>
-                  <b>④&nbsp;成交</b>：谁最后是最高价，这件就归谁。<br>
-                  <b>·</b> 你是最高价 → 点<b>「落槌」</b>＝按现价买下（真扣心意币，收进 🎒）。<br>
-                  <b>·</b> TA 最高价 → 点<b>「放弃这件」</b>＝这件归 TA，不扣你的钱。<br>
-                  <b>·</b> 双方都不要 → <b>流拍</b>，收回仓库。<br>
-                  <b>⑤&nbsp;彩蛋</b>：TA 拍走的拍品过几天会寄回给你。<br>
-                  <b>⑥&nbsp;暗价</b>：TA 每件的心理价位是暗的（志在必得/常规/抠门/虚张声势），猜不准才好玩。<br>
-                  <b>⑦&nbsp;自制拍品</b>：点顶部 ➕ 打开编辑台——选一枚 emoji 或上传一张商品图，填名称/起拍价（还能留一句拍下彩蛋、勾「神秘拍品」蒙面上拍），你们的小宝贝就进奖池；编辑台底部的库条点一下即可改，删除要先确认。
-                </div>
-                <div class="pong-overlay-btns">
-                  <button class="pong-overlay-btn" id="au-help-close" type="button">知道啦</button>
-                </div>
-              </div>
-              <div class="au-fs-overlay" id="au-intro" hidden>
-                <div class="au-intro-title">💎 心意币拍卖会</div>
-                <div class="au-intro-steps" id="au-intro-steps"></div>
-                <div class="au-intro-stat" id="au-intro-stat"></div>
-                <div class="pong-overlay-btns">
-                  <button class="pong-overlay-btn" id="au-intro-start" type="button">开始拍卖</button>
-                  <button class="pong-overlay-btn pong-overlay-btn2" id="au-intro-help" type="button">详细玩法</button>
-                  <!-- #341 教学浮层是全屏的、盖住头部 ✕，没有这个出口用户想走只能先开局 -->
-                  <button class="pong-overlay-btn pong-overlay-btn2" id="au-intro-exit" type="button">先不玩</button>
-                </div>
-              </div>
-              <!-- #1041 自制拍品全屏编辑台（方案 A，用户选定）：所见即所得预览卡＋emoji 自选＋商品图片＋
-                   名称/介绍/底价/彩蛋＋蒙面开关；库条＝已有自制拍品点选即改。静态锚点在此、内容由 auction.js 渲染。 -->
-              <div class="au-fs-overlay au-editor" id="au-editor" hidden>
-                <div class="au-ed-card">
-                  <div class="au-ed-head">
-                    <div class="au-ed-title" id="au-ed-title">✏️ 自制拍品</div>
-                    <button class="snake-icon-btn" id="au-ed-close" type="button" title="关闭">✕</button>
-                  </div>
-                  <div class="au-ed-preview" id="au-ed-preview"></div>
-                  <div class="au-ed-body">
-                    <div class="au-ed-label">图标 · 选一个 emoji</div>
-                    <div class="au-ed-grid" id="au-ed-grid"></div>
-                    <div class="au-ed-label">商品图片（可选，盖过 emoji）</div>
-                    <div class="au-ed-imgrow">
-                      <div class="au-ed-imgprev" id="au-ed-imgprev">🖼️</div>
-                      <button class="au-ed-imgbtn" id="au-ed-imgbtn" type="button">上传图片</button>
-                      <button class="au-ed-imgbtn" id="au-ed-imgclear" type="button" hidden>移除</button>
-                    </div>
-                    <div class="au-ed-label">名称与底价</div>
-                    <input class="au-ed-inp" id="au-ed-name" maxlength="24" placeholder="名称（如：我们的灯笼）">
-                    <div class="au-ed-row2">
-                      <input class="au-ed-inp" id="au-ed-desc" maxlength="40" placeholder="一句话介绍（可选）">
-                      <input class="au-ed-inp au-ed-price" id="au-ed-base" inputmode="decimal" placeholder="¥20">
-                    </div>
-                    <div class="au-ed-label">拍下后的一句话彩蛋（可空）</div>
-                    <input class="au-ed-inp" id="au-ed-wish" maxlength="30" placeholder="例：第一盏留给你点">
-                    <label class="au-ed-switch"><span>神秘拍品（🎁 蒙面登场，落槌才揭晓）</span><input type="checkbox" id="au-ed-mystery"><i></i></label>
-                    <div class="au-ed-hint" id="au-ed-hint" hidden></div>
-                  </div>
-                  <div class="au-ed-lib" id="au-ed-lib"></div>
-                  <div class="au-ed-foot">
-                    <button class="pong-overlay-btn pong-overlay-btn2 au-ed-del" id="au-ed-del" type="button" hidden>删除</button>
-                    <button class="pong-overlay-btn pong-overlay-btn2" id="au-ed-cancel" type="button">取消</button>
-                    <button class="pong-overlay-btn" id="au-ed-save" type="button">保存</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="au-bids">
-              <button class="pong-overlay-btn" id="au-bid1" type="button">出 ¥</button>
-              <button class="pong-overlay-btn" id="au-bid5" type="button">出 ¥</button>
-              <button class="pong-overlay-btn" id="au-bid13" type="button">出 ¥</button>
-              <button class="pong-overlay-btn pong-overlay-btn2" id="au-pass" type="button">放弃这件</button>
-            </div>
-            <!-- #346 余额不足/账本未就绪提示行：出价键静默置灰时告诉用户为什么 -->
-            <div class="au-wallet-hint" id="au-wallet-hint" hidden></div>
-            <div class="au-status" id="au-status">点击「开场拍卖」</div>
-            <div class="pong-foot">落槌价从心意币里真扣 · TA 的心理价位是暗的 · 拍到的收进 🎒</div>
-          </div>
-        </div>
-      </div>
-      <!-- 游乐室：聊天页底部半框（小游戏战绩聚合 + 徽章 + 幸运游戏 + 限定摆件图鉴，#301） -->
-      <div class="poke-card" id="chat-arcade-panel" hidden>
-        <div class="poke-card-head">
-          <span>游乐室 · 和 <b id="arc-partner-name">TA</b> 的战绩</span>
-          <div class="snake-head-actions">
-            <button class="poke-card-close" id="arc-close">✕</button>
-          </div>
-        </div>
-        <div class="poke-card-scroll">
-          <div class="arc-wrap">
-            <div id="arc-body"></div>
-            <div class="pong-foot">幸运游戏当日奖励 ×2 · 胜利有概率掉落限定摆件 · 战绩按联系人桌面分开记</div>
-          </div>
-        </div>
-      </div>
       <!-- 红包：聊天页底部半框（我和 TA 互发红包，情侣特殊金额 / 随机 / 七夕特别） -->
       <div class="poke-card" id="chat-rp-panel" hidden>
         <div class="poke-card-head">
@@ -16724,37 +16418,6 @@ document.addEventListener("DOMContentLoaded", function () {
           </div>
         </div>
       </div>
-      <!-- 寻踪半框（点顶部联系人头像打开，露出聊天消息） -->
-      <!-- FIX 2026-09-14 #474：此处原有 3 个连续 </div>（关 chat-ask-actions / poke-card-scroll / chat-ask-panel）。
-          108b918 误删 chat-ask-actions 三按钮时把第三个 </div> 一起删掉，#471 恢复按钮但漏恢复该闭合 →
-          后续全部 .page（聊天设置/群聊/房间/漂流瓶/梦角/心情/我的档案/此间）被吞进 chat-ask-panel 内，
-          父级 page-chat 一隐藏子级联动 display:none = 8 个子页整页白屏（多机型必现）。缺失闭合必须保留。 -->
-      <div class="poke-card" id="ck-panel" hidden>
-        <div class="poke-card-head">
-          <span>寻踪 · <b id="ck-panel-name">TA</b> 的日常</span>
-          <button class="poke-card-close" id="ck-panel-close">✕</button>
-        </div>
-        <div class="poke-card-scroll" id="ck-panel-body">
-          <div class="ck-location"><span class="ck-label">TA 在哪里</span><div class="ck-value" id="ck-p-place">—</div></div>
-          <div class="ck-location"><span class="ck-label">TA 在做什么</span><div class="ck-value" id="ck-p-action">—</div></div>
-          <div class="ck-location"><span class="ck-label">TA 想对你说</span><div class="ck-value" id="ck-p-msg">—</div></div>
-          <div class="ck-updated" id="ck-p-updated"></div>
-          <!-- v3.26.x #875：与桌面寻踪页那颗同款（两入口形态必须一致）——图标＋主副两行＋箭头，
-               副标题点出位置面板里到底有什么，用户才知道这是一处独立功能、以及三枚换位开关在哪。 -->
-          <button class="ck-loc-entry" id="ck-loc-entry"><span class="ck-loc-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s6.5-5.4 6.5-10.5a6.5 6.5 0 10-13 0C5.5 15.6 12 21 12 21z"/><circle cx="12" cy="10.5" r="2.4"/></svg></span><span class="ck-loc-main"><span class="ck-loc-t">TA在身边 · 位置感知</span><span class="ck-loc-s">方位感知·位置时间线·换位开关</span></span><span class="ck-loc-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span></button>
-        </div>
-      </div>
-      <!-- 拍一拍浮层卡片（聊天页内） -->
-      <div class="poke-card" id="poke-card" hidden>
-        <div class="poke-card-head">
-          <span>拍一拍 · <b id="poke-partner-name">TA</b></span>
-          <button class="poke-card-close" id="poke-card-close">✕</button>
-        </div>
-        <div class="poke-card-scroll" id="poke-list">
-          <!-- 分组/字卡由 JS 渲染 -->
-        </div>
-      </div>
-
       <!-- 消息气泡操作菜单 -->
       <div class="msg-actions" id="msg-actions" hidden>
         <button class="ma-btn" data-act="quote" title="引用">
@@ -16885,122 +16548,6 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
     </div>
 
-    <!-- 此间：梦角世界时间与在场感知（聊天「更多功能」进入） -->
-    <div class="page" id="page-cjian" hidden>
-      <div class="chat-head">
-        <span class="ch-back" id="cj-back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-        </span>
-        <span class="ch-name">此间</span>
-        <span class="ch-settings" id="cj-manage-btn" title="梦角管理">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8a4 4 0 100 8 4 4 0 000-8z"/><path d="M19 12a7 7 0 00-.1-1.2l2-1.6-2-3.4-2.3 1a7 7 0 00-2-1.2L14.2 3h-4l-.4 2.6a7 7 0 00-2 1.2l-2.3-1-2 3.4 2 1.6A7 7 0 005 12c0 .4 0 .8.1 1.2l-2 1.6 2 3.4 2.3-1a7 7 0 002 1.2l.4 2.6h4l.4-2.6a7 7 0 002-1.2l2.3 1 2-3.4-2-1.6c.1-.4.1-.8.1-1.2z"/></svg>
-        </span>
-      </div>
-      <div class="gs-scroll cj-scroll" id="cj-main">
-        <div class="cj-hero">
-          <div class="cj-hero-sub">此刻，你与TA之间。</div>
-          <div class="cj-hero-time" id="cj-hero-time">—</div>
-          <div class="cj-hero-range" id="cj-hero-range"></div>
-        </div>
-        <div id="cj-list"></div>
-        <div class="cj-empty" id="cj-empty" hidden>
-          <p>此间还没有梦角。</p>
-          <p class="cj-empty-sub">添加一个你想感知的人，看看TA此刻在哪、在做什么。</p>
-          <button class="cj-go cj-empty-add" id="cj-empty-add" type="button">添加梦角</button>
-        </div>
-        <button class="cj-perceive" id="cj-perceive" type="button">感知此间</button>
-        <div class="cj-perceive-result" id="cj-perceive-result" hidden></div>
-        <!-- #902：感知/状态流动/突然靠近的真实概率与触发节奏写进页面（用户反馈「概率和触发时间要写清楚」） -->
-        <div class="cj-today-note" id="cj-rate-note">概率与节奏：感知能对上的机会——很近 95%／可能在附近 75%／在远处 40%／离开中 25%／感知不到 12%，每次感知最多改变一位梦角（15 分钟内不会再次改变）；状态自然流动——在场状态每 20～45 分钟、在做的事每 8～25 分钟重抽一次；「……好像有什么靠近了。」是低概率小惊喜——每 30 秒检查一次，某位梦角状态超过 2 小时没变时约 0.3% 概率触发（全局至少间隔 20 分钟），触发后 90% 变「可能在附近」、10% 变「很近」，只改状态、不会发消息。</div>
-        <div class="cj-today-title">今日</div>
-        <div class="cj-today-note">每次打开，TA们会重新选择今天可能的样子。</div>
-        <div id="cj-today"></div>
-      </div>
-      <div class="gs-scroll cj-scroll" id="cj-detail" hidden>
-        <button class="cj-detail-back" id="cj-detail-back" type="button">‹ 返回</button>
-        <div id="cj-detail-body"></div>
-      </div>
-    </div>
-
-    <!-- 房间：双人小屋（桌面第三页「房间」/ 聊天更多功能进入） -->
-    <div class="page" id="page-room" hidden>
-      <div class="chat-head">
-        <span class="ch-back" id="room-back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-        </span>
-        <span class="ch-name">房间</span>
-        <span class="ch-settings" id="room-info-btn" title="小屋信息">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></svg>
-        </span>
-      </div>
-      <div class="room-stage">
-        <div class="r-hud">
-          <span class="r-chip" id="room-chip-lv">🏡 Lv.1</span>
-          <span class="r-chip" id="room-chip-cf">舒适度 ★☆☆☆☆</span>
-          <span class="r-chip" id="room-chip-cap">家具 0/9</span>
-          <span class="r-chip" id="room-chip-pt">🏠 0</span>
-        </div>
-        <div class="r-scene" id="room-scene">
-          <div class="r-wall wall-cream" id="room-wall">
-            <div class="r-door"></div>
-            <div class="r-window wa" id="room-win-a"><span class="r-sky" id="room-sky-a">☀️</span></div>
-            <div class="r-window wb" id="room-win-b"><span class="r-sky" id="room-sky-b">☀️</span></div>
-          </div>
-          <div class="r-floor floor-wood" id="room-floor"></div>
-          <div id="room-ta"><i class="r-ta-glow"></i></div>
-          <div class="r-bubble" id="room-bubble" hidden></div>
-          <div class="r-banner" id="room-banner" hidden>
-            <span id="room-banner-txt"></span>
-            <button id="room-banner-cancel" type="button">取消</button>
-          </div>
-        </div>
-        <div class="r-status" id="room-status">…</div>
-        <div class="r-sense-out" id="room-sense-out" hidden></div>
-        <div class="r-bar">
-          <button id="room-btn-inv" type="button">家具仓</button>
-          <button id="room-btn-sense" type="button">感应</button>
-          <button id="room-btn-deco" type="button">装扮</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 漂流瓶：两个世界之间的海（聊天更多功能【互动】进入；src/js/drift-bottle.js） -->
-    <div class="page" id="page-drift" hidden>
-      <div class="chat-head">
-        <span class="ch-back" id="drift-back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-        </span>
-        <span class="ch-name">漂流瓶</span>
-        <span class="ch-settings" id="drift-info-btn" title="关于漂流瓶">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></svg>
-        </span>
-      </div>
-      <div class="drift-scroll">
-        <div class="drift-sea" id="drift-sea">
-          <span class="ds-moon">🌙</span>
-          <span class="ds-sun">☀️</span>
-          <span class="ds-cloud c1">☁️</span>
-          <span class="ds-cloud c2">☁️</span>
-          <div class="ds-wave w1"></div>
-          <div class="ds-wave w2"></div>
-          <div class="ds-bob" id="drift-bob">🫙</div>
-          <div class="ds-cap" id="drift-sea-cap">两个世界之间的海</div>
-        </div>
-        <div class="d-actions">
-          <button class="d-pick" id="drift-pick" type="button">捡一个</button>
-          <button class="d-put" id="d-put" type="button">🌊 我也放一个</button>
-        </div>
-        <div class="d-open glass" id="d-open" hidden></div>
-        <div class="d-stats" id="d-stats"></div>
-        <div class="d-tabs">
-          <button class="d-tab sel" data-t="mine" type="button">我的瓶子</button>
-          <button class="d-tab" data-t="got" type="button">捡到的</button>
-          <button class="d-tab" data-t="theirs" id="d-tab-theirs" type="button"></button>
-          <button class="d-tab" data-t="fav" type="button">收藏</button>
-        </div>
-        <div class="d-list" id="d-list"></div>
-      </div>
-    </div>
 
     <!-- 梦角档案：每个梦角一份，记录「我后来才慢慢了解到的TA」（桌面第三页「梦角档案」进入） -->
     <div class="page" id="page-memo-arc" hidden>
@@ -17288,10 +16835,6 @@ document.addEventListener("DOMContentLoaded", function () {
             <span class="mi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.5-6 8-6s8 2 8 6"/></svg></span>
             <span>头像和昵称互动</span>
           </button>
-          <button class="more-item" id="more-drift" data-mcat="chat" title="漂流瓶（两个世界之间的海）">
-            <span class="mi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 2.5h4v3.2l1.5 2A7.2 7.2 0 0117 11.6V19a2 2 0 01-2 2H9a2 2 0 01-2-2v-7.4c0-1.4.46-2.77 1.5-3.9L10 5.7z"/><path d="M10.4 12.6h3.2"/><path d="M2.5 18.6c1.5 1.1 3 1.1 4.5 0s3-1.1 4.5 0 3 1.1 4.5 0 3-1.1 4.5 0"/></svg></span>
-            <span>漂流瓶</span>
-          </button>
           <button class="more-item" id="more-divine" data-mcat="tool" title="占卜">
             <span class="mi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18" rx="1.5"/><path d="M12 8.5l1.15 2.4 2.4 1.15-2.4 1.15L12 15.6l-1.15-2.4-2.4-1.15 2.4-1.15z"/></svg></span>
             <span>占卜</span>
@@ -17309,14 +16852,6 @@ document.addEventListener("DOMContentLoaded", function () {
           <button class="more-item" id="more-brick" data-mcat="game" title="双人打砖块（合作）">
             <span class="mi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1.5"/><path d="M3 9.3h18M3 14.6h18"/><path d="M12 4v5.3M7.5 9.3v5.3M16.5 9.3v5.3M12 14.6V20"/></svg></span>
             <span>打砖块</span>
-          </button>
-          <button class="more-item" id="more-fish" data-mcat="game" title="双人钓鱼">
-            <span class="mi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17.8 8.8l4.2-3.3"/><path d="M17.8 16.2l4.2 3.3"/><ellipse cx="10.6" cy="12.5" rx="7.2" ry="4.3"/><circle cx="7.2" cy="11.3" r=".6" fill="currentColor" stroke="none"/><path d="M3 5.2q1.7-1.1 3.4 0q1.7-1.1 3.4 0q1.7-1.1 3.4 0"/></svg></span>
-            <span>钓鱼</span>
-          </button>
-          <button class="more-item" id="more-c4" data-mcat="game" title="四子棋">
-            <span class="mi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="8" cy="8" r="3.2"/><circle cx="16" cy="8" r="3.2"/><circle cx="8" cy="16" r="3.2"/><circle cx="16" cy="16" r="3.2"/></svg></span>
-            <span>四子棋</span>
           </button>
           <button class="more-item" id="more-ms" data-mcat="game" title="合作扫雷（和TA一起探索雷区）">
             <span class="mi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/><circle cx="12" cy="12" r="2.3"/></svg></span>
@@ -17337,22 +16872,6 @@ document.addEventListener("DOMContentLoaded", function () {
           <button class="more-item" id="more-match3" data-mcat="game" title="消消乐（和TA轮流消除）">
             <span class="mi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.2" cy="15" r="2.7"/><circle cx="12" cy="8.2" r="2.7"/><circle cx="16.8" cy="15" r="2.7"/></svg></span>
             <span>消消乐</span>
-          </button>
-          <button class="more-item" id="more-auction" data-mcat="game" title="心意币拍卖会（和TA竞拍）">
-            <span class="mi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12.4 5.4l6.2 6.2M14.6 3.2l6.2 6.2-2.2 2.2-6.2-6.2z"/><path d="M13.6 9.8l-8.4 8.4"/><path d="M4.2 21h7"/></svg></span>
-            <span>拍卖会</span>
-          </button>
-          <button class="more-item" id="more-ck" data-mcat="tool" title="寻踪（打开 TA 的日常）">
-            <span class="mi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/><path d="M12 3a9 9 0 000 18"/></svg></span>
-            <span>寻踪</span>
-          </button>
-          <button class="more-item" id="more-cjian" data-mcat="tool" title="此间（梦角世界时间与在场感知）">
-            <span class="mi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 010 18"/><circle cx="12" cy="12" r="2.2"/></svg></span>
-            <span>此间</span>
-          </button>
-          <button class="more-item" id="more-room" data-mcat="tool" title="房间（双人小屋）">
-            <span class="mi-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11L12 4l8.5 7"/><path d="M5.8 9.6V20h12.4V9.6"/><path d="M10 20v-5.4h4V20"/></svg></span>
-            <span>房间</span>
           </button>
         </div>
         <div class="more-grid" id="more-grid-ask" hidden>
@@ -17393,38 +16912,6 @@ document.addEventListener("DOMContentLoaded", function () {
           </button>
         </div>
       </div>
-
-    <!-- TA在身边·位置面板（聊天寻踪半框 / 桌面寻踪页「TA在身边」入口共用，必须放在所有 .page 之外——
-         position:fixed 弹层若嵌在 .page 内，页面切换时会被父级 hidden 隐藏，桌面寻踪页点开就会"跑到聊天页"；
-         v3.26.x：两入口统一 .loc-full 全屏打开） -->
-    <div class="loc-panel" id="loc-panel" hidden>
-      <div class="loc-head">
-        <button class="loc-back" id="loc-back" aria-label="返回">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-        </button>
-        <span class="loc-title">TA在身边 · <b id="loc-name">TA</b> 的位置</span>
-      </div>
-      <div class="loc-scroll">
-        <!-- 方位感知（v3.13.x：模糊感知，不是精确定位） -->
-        <div class="fw-sense" id="fw-sense">
-          <div class="fw-title">
-            <span class="fw-title-t">方位感知</span>
-            <span class="fw-title-s">不是精确定位 · 是你对 TA 的模糊感觉</span>
-          </div>
-          <div class="fw-circle" id="fw-circle"></div>
-          <div class="fw-detail" id="fw-detail"></div>
-          <button class="fw-perceive" id="fw-perceive" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M18.4 5.6l-2.1 2.1M7.7 16.3l-2.1 2.1"/><circle cx="12" cy="12" r="4"/></svg>
-            感知一下
-          </button>
-          <div class="fw-result" id="fw-result" hidden></div>
-        </div>
-        <div class="loc-body" id="loc-body"></div>
-      </div>
-    </div>
-
-    <!-- 位置卡光点动效层（全局，同样须在 .page 外） -->
-    <div class="loc-fx" id="loc-fx" hidden></div>
 
     <!-- 聊天设置（独立页面） -->
     <div class="page" id="page-chat-settings" hidden>
@@ -17908,7 +17395,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // v3.5.123：readonly 起手（防 Chrome 密码弹条破坏表单签名）——这里立即解除，
   // 早于所有功能模块，任何设备都不会出现输入框不可用的情况
   (function () { var _ci = document.getElementById('chat-input'); if (_ci) _ci.readOnly = false; })();
-window.__jsErrors = window.__jsErrors || []; window.__mochiLoaded = window.__mochiLoaded || []; window.__mochiErrLoaded = window.__mochiErrLoaded || []; window.__mochiBootAt = Date.now(); window.__mochiJsFiles = ["device.js","idb.js","contacts.js","applock.js","card-lock.js","dcp-master.js","media-pool.js","storage-slim.js","perf-check.js","energy-check.js","flash-check.js","img-compress.js","img-ingest.js","clock.js","tabs.js","desktop-slider.js","quote-cards.js","personalize.js","chat.js","group-chat.js","chatcard.js","chat-settings.js","reply-settings.js","fav-settings.js","default-cards-data.js","dict-ext-data.js","default-cards.js","quote-spell.js","dream-free.js","mood-followup-data.js","mood-reply-cards.js","ta-mood-data.js","ta-mood.js","music-player.js","calendar.js","divination.js","avatar-lib.js","ta-ask.js","ck-question.js","incoming-requests.js","ta-invite.js","bg-keep.js","records.js","call.js","mail.js","feed.js","loc-lib.js","p2-features.js","gift-shop.js","memo-app.js","memo-arc.js","my-arc.js","period.js","accounting.js","garden.js","room.js","drift-bottle.js","decision.js","group-decision.js","pong.js","snake-game.js","breakout.js","connect-four.js","coop-mine.js","fishing.js","memory-game.js","gomoku.js","linkup.js","match3.js","auction.js","arcade.js","mood-diary.js","sfx.js","fullscreen.js","data-backup.js","feature-data.js","pwa.js","cjian.js","feature-hub.js","settings-help.js","onboarding.js","page-coach.js","card-audit.js","storage-guide.js","mobile-adapt.js"]; window.__mochiExtFiles = ["idb.js","contacts.js","applock.js","card-lock.js","dcp-master.js","media-pool.js","storage-slim.js","perf-check.js","energy-check.js","flash-check.js","img-compress.js","img-ingest.js","clock.js","tabs.js","desktop-slider.js","quote-cards.js","personalize.js","chat.js","group-chat.js","chatcard.js","chat-settings.js","reply-settings.js","fav-settings.js","default-cards-data.js","dict-ext-data.js","default-cards.js","quote-spell.js","dream-free.js","mood-followup-data.js","mood-reply-cards.js","ta-mood-data.js","ta-mood.js","music-player.js","calendar.js","divination.js","avatar-lib.js","ta-ask.js","ck-question.js","incoming-requests.js","ta-invite.js","bg-keep.js","records.js","call.js","mail.js","feed.js","loc-lib.js","p2-features.js","gift-shop.js","memo-app.js","memo-arc.js","my-arc.js","period.js","accounting.js","garden.js","room.js","drift-bottle.js","decision.js","group-decision.js","pong.js","snake-game.js","breakout.js","connect-four.js","coop-mine.js","fishing.js","memory-game.js","gomoku.js","linkup.js","match3.js","auction.js","arcade.js","mood-diary.js","sfx.js","fullscreen.js","data-backup.js","feature-data.js","cjian.js","feature-hub.js","settings-help.js","onboarding.js","page-coach.js","card-audit.js","storage-guide.js","mobile-adapt.js"];
+window.__jsErrors = window.__jsErrors || []; window.__mochiLoaded = window.__mochiLoaded || []; window.__mochiErrLoaded = window.__mochiErrLoaded || []; window.__mochiBootAt = Date.now(); window.__mochiJsFiles = ["device.js","idb.js","contacts.js","applock.js","card-lock.js","dcp-master.js","media-pool.js","storage-slim.js","perf-check.js","energy-check.js","flash-check.js","img-compress.js","img-ingest.js","clock.js","tabs.js","desktop-slider.js","quote-cards.js","personalize.js","chat.js","group-chat.js","chatcard.js","chat-settings.js","reply-settings.js","fav-settings.js","default-cards-data.js","dict-ext-data.js","default-cards.js","quote-spell.js","dream-free.js","mood-followup-data.js","mood-reply-cards.js","ta-mood-data.js","ta-mood.js","music-player.js","calendar.js","divination.js","avatar-lib.js","ta-ask.js","ck-question.js","incoming-requests.js","ta-invite.js","bg-keep.js","records.js","call.js","mail.js","feed.js","loc-lib.js","p2-features.js","gift-shop.js","memo-app.js","memo-arc.js","my-arc.js","period.js","accounting.js","garden.js","room.js","drift-bottle.js","decision.js","group-decision.js","pong.js","snake-game.js","breakout.js","connect-four.js","coop-mine.js","fishing.js","memory-game.js","gomoku.js","linkup.js","match3.js","auction.js","arcade.js","mood-diary.js","sfx.js","fullscreen.js","data-backup.js","feature-data.js","pwa.js","cjian.js","feature-hub.js","settings-help.js","onboarding.js","page-coach.js","card-audit.js","storage-guide.js","mobile-adapt.js"]; window.__mochiExtFiles = ["idb.js","contacts.js","applock.js","card-lock.js","dcp-master.js","media-pool.js","storage-slim.js","perf-check.js","energy-check.js","flash-check.js","img-compress.js","img-ingest.js","clock.js","tabs.js","desktop-slider.js","quote-cards.js","personalize.js","chat.js","group-chat.js","chatcard.js","chat-settings.js","reply-settings.js","fav-settings.js","default-cards-data.js","dict-ext-data.js","default-cards.js","quote-spell.js","dream-free.js","mood-followup-data.js","mood-reply-cards.js","ta-mood-data.js","ta-mood.js","music-player.js","calendar.js","divination.js","avatar-lib.js","ta-ask.js","ck-question.js","incoming-requests.js","ta-invite.js","bg-keep.js","records.js","call.js","mail.js","feed.js","loc-lib.js","p2-features.js","gift-shop.js","memo-app.js","memo-arc.js","my-arc.js","period.js","decision.js","group-decision.js","pong.js","snake-game.js","breakout.js","coop-mine.js","memory-game.js","gomoku.js","linkup.js","match3.js","auction.js","arcade.js","mood-diary.js","sfx.js","fullscreen.js","data-backup.js","feature-data.js","feature-hub.js","settings-help.js","onboarding.js","page-coach.js","card-audit.js","storage-guide.js","mobile-adapt.js"];
 (function () { try {
 (function () {
 try { window.__jsErrors = window.__jsErrors || []; } catch (e0) {}
@@ -20925,11 +20412,7 @@ const FUNC_ITEMS = [
 { n: '收藏', app: 'note', page: 'page-fav', open: true },
 { n: '统计', app: 'stats', page: 'page-stats', open: true },
 { n: '提问记录', app: 'interact', page: 'page-interact', open: true },
-{ n: '寻踪打卡', app: 'checkin', page: 'page-checkin', open: true },   // #1279 图标开的是寻踪页 page-checkin（不是字卡库题库页）。#1403 起删掉 gated 那句：总开关不再拦这一页（关掉后页面照开、页顶写明「已禁用」），留着它＝真出故障时诊断会拿「总开关已关闭」当借口，正是 #1279 要治的那一型凭空原因
 { n: '占卜', app: 'divination', page: 'page-divine', open: true },
-{ n: '花园', app: 'garden', page: 'page-garden', open: true },
-{ n: '此间', app: 'cjian', page: 'page-cjian', open: true },
-{ n: '房间', app: 'room', page: 'page-room', open: true },
 { n: '经期记录', app: 'period', page: 'page-period', open: true, audit: function (pg) {
 const out = [];
 try {
@@ -20950,7 +20433,6 @@ out.push(same ? '✗ 日历格填色与空白格同色(' + getComputedStyle(cell
 } catch (eA0) { out.push('日历填色-读取异常(不计失败)'); }
 return out;
 } },
-{ n: '记账', app: 'accounting', page: 'page-accounting', open: true },
 { n: '梦角档案', app: 'memo-arc', page: 'page-memo-arc', open: true },
 { n: '我的档案', app: 'my-arc', page: 'page-my-arc', open: true },
 { n: '音乐', app: 'music', page: 'page-music', open: true },
@@ -22826,94 +22308,6 @@ window.__mochiBootRetry = function () { try { location.reload(); } catch (e) {} 
   <span id="mochi-html-eof" hidden aria-hidden="true"></span>
 <!-- __MOCHI_EOF__ -->
 <!-- 腾讯云开发云同步模块 -->
-<script src="https://static.cloudbase.net/cloudbase-js-sdk/latest/cloudbase.full.js"></script>
-<script>
-(async function() {
-    // ⚠️ 这里填入你的环境 ID（就是我们之前截图上那个）
-    const ENV_ID = 'mochi-sylvia-d2g53dms0999233e1'; 
-
-    // 初始化腾讯云
-    const app = cloudbase.init({ env: ENV_ID });
-    const auth = app.auth();
-    const db = app.database();
-
-    // 1. 匿名登录
-    try {
-        await auth.signInAnonymously();
-        console.log('腾讯云匿名登录成功！');
-    } catch (e) {
-        console.error('腾讯云登录失败，不影响本地使用：', e);
-    }
-
-    // 2. 网页启动时：去云端拉取数据
-    setTimeout(async () => {
-        try {
-            console.log('开始从腾讯云同步数据...');
-            // 每次最多拉取100条（够用，如果有更多数据可以翻页）
-            const res = await db.collection('mochi-data').limit(100).get();
-            
-            if (res.data && res.data.length > 0) {
-                for (let row of res.data) {
-                    const localVal = await window.idbGet(row.id);
-                    // 如果本地没有这个数据，就把云端的写进来
-                    if (localVal === undefined || localVal === null) {
-                        await window.idbSet(row.id, row.payload);
-                        console.log('从云端恢复了一个键:', row.id);
-                    }
-                }
-            }
-            console.log('腾讯云数据同步完成！');
-        } catch (e) {
-            console.error('云同步拉取失败，不影响本地使用：', e);
-        }
-    }, 2000);
-
-    // 3. 拦截本地写入：只要本地写数据，就偷偷上传一份到云端
-    setTimeout(() => {
-        if (!window.idbSet) return;
-        const originalSet = window.idbSet;
-        window.idbSet = async function(key, value) {
-            // 先保留原作者的本地写入逻辑
-            const res = await originalSet(key, value);
-            // 再异步上传到云端（不阻塞界面，失败也不影响本地）
-            try {
-                // 尝试更新，如果没这条记录就新增
-                await db.collection('mochi-data').doc(key).set({
-                    id: key,
-                    payload: value
-                });
-            } catch (e) {
-                console.log('云端上传失败，数据已存在本地:', e);
-            }
-            return res;
-        };
-    }, 2000);
-
-    // 4. 拦截全量替换（导入备份时）
-    setTimeout(() => {
-        if (!window.idbReplaceAll) return;
-        const originalReplaceAll = window.idbReplaceAll;
-        window.idbReplaceAll = async function(entries) {
-            const res = await originalReplaceAll(entries);
-            try {
-                // 全量覆盖云端（腾讯云不支持一次性批量写入太多，我们循环写入）
-                for (let e of entries) {
-                    if (e && e.k && e.v !== null && e.v !== undefined) {
-                        await db.collection('mochi-data').doc(e.k).set({
-                            id: e.k,
-                            payload: e.v
-                        });
-                    }
-                }
-            } catch (e) {
-                console.log('云端全量覆盖失败:', e);
-            }
-            return res;
-        };
-    }, 2000);
-
-})();
-</script>
 </body>
 </html>
 <!-- __MOCHI_EOF__ muz2ctep -->

@@ -2,7 +2,6 @@
 (function () {
 const G = 'xy-home-v2';
 const EXCLUDE = ['contacts', 'active-contact', 'feed-posts', 'migrated-v1', 'js-errors', 'theme-mode', 'accent-color',
-'fish-log', 'fish-log-global-migrated',
 'age-confirmed', 'storage-guide-shown',
 'incoming-requests', 'desk-checkin-en', 'desk-call-en', 'desk-freq-mode', 'call-hold',
 'night-mode-en',
@@ -20,21 +19,14 @@ const EXCLUDE = ['contacts', 'active-contact', 'feed-posts', 'migrated-v1', 'js-
 'emoji-recent-kaomoji', 'emoji-recent-emoji',
 '__coach-seen',
 'media-auto-check',
-'piggy-log', 'piggy-goal-name', 'piggy-goal-amt', 'piggy-cards', 'piggy-last-visit',
-'piggy-goals', 'piggy-goal-cur', 'piggy-coin-log', 'piggy-coin-goals', 'piggy-coin-goal-cur', 'piggy-coin-last-visit',
-'piggy-coin-prob',
 'market-custom', 'market-migrated',
 'market-migrated-v2', 'market-migrated-v3',
-'cjian-roster', 'cjian-state', 'cjian-seeded', 'cjian-rehome-v1',
-'cjian-belong-v2',
 'feed-notices', 'feed-app-unread', 'feed-cover-bg', 'feed-ta-cover',
 'feed-ta-name', 'feed-ta-avatar', 'feed-user-name', 'feed-user-avatar',
 'feed-last', 'feed-next', 'feed-day-count',
 'psync-snap', 'psync-queue', 'psync-en',
 'decision-history', 'decision-settings', 'dec-global-migrated',
 'gdec-members', 'gdec-history', 'gdec-settings', 'gdec-global-migrated',
-'pomo-cfg', 'pomo-today', 'pomo-total', 'pomo-msgs', 'pomo-send-chat', 'pomo-bell',
-'pomo-companion', 'pomo-companion-log', 'pomo-cmp-usecards',
 'memo-app-items', 'memo-app-send', 'memo-app-global-migrated', 'memo-app-remind',
 'beauty-schemes', 'chat-beauty-schemes', 'hide-ta-sticker',
 'hide-tab-kaomoji', 'hide-tab-emoji',
@@ -47,7 +39,6 @@ const EXCLUDE = ['contacts', 'active-contact', 'feed-posts', 'migrated-v1', 'js-
 'cardlock-state',
 'cs-font',
 'sfx-unified',
-'entry-cjian-first', 'entry-default-contact', 'entry-show-list',
 'battery-check-run', 'battery-check-last', 'heat-check-last',
 'flash-check-last',
 'ver-retry',
@@ -658,7 +649,7 @@ row.appendChild(ok); row.appendChild(no); box.appendChild(row);
 m2.appendChild(box); showContactModal(m2);
 }
 function entryCjianFirstOn() {
-try { return regStore().get('entry-cjian-first') === '1'; } catch (e) { return false; }
+  return false; // 此间已删除，永远不启用
 }
 function entryShowListOn() {
 try { return regStore().get('entry-show-list') === '1'; } catch (e) { return false; }

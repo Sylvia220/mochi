@@ -8700,32 +8700,6 @@ if (window.toggleCkPanel) window.toggleCkPanel();
 else if (window.openCkPanel) window.openCkPanel();
 });
 }
-const moreCk = document.getElementById('more-ck');
-if (moreCk) {
-moreCk.addEventListener('click', (e) => {
-e.stopPropagation();
-if (morePanel) morePanel.hidden = true;
-// 聊天「更多功能」寻踪：全屏打开寻踪页（返回时回聊天）
-if (window.openCheckinPage) {
-window.__ckFrom = 'chat';
-window.openCheckinPage();
-} else toast('寻踪加载失败');
-});
-}
-const moreCjian = document.getElementById('more-cjian');
-if (moreCjian) {
-moreCjian.addEventListener('click', (e) => {
-e.stopPropagation();
-if (morePanel) morePanel.hidden = true;
-if (window.openCjian) {
-window.__cjianFrom = 'chat';
-try { window.openCjian(); } catch (err) {
-try { if (window.__jsErrors) window.__jsErrors.push('openCjian: ' + (err && err.message || err)); } catch (e2) {}
-toast('此间打开出错，请刷新页面重试');
-}
-} else toast('此间加载失败，请刷新页面重试');
-});
-}
 let lastMineText = '';
 let lastMineIdx = -1;
 let lastMineQuote = '';
