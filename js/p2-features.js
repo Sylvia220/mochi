@@ -617,8 +617,7 @@ el.setAttribute('style', 'margin:0 0 10px;padding:8px 10px;border-radius:10px;fo
 card.insertBefore(el, card.firstChild);
 }
 el.textContent = '已禁用：联系人无法再触发更新日常。下面是关闭前的最后一次日常；「TA在身边 · 位置感知」不受影响，照常可用。重新开启：设置 → 工具 → 寻踪（TA 的日常）。';
-} else if (el) el.remove();
-}
+} else if (el && el.parentNode) el.parentNode.removeChild(el);}
 function syncCkSwitchUI() {
 const on = ckEn();
 const a = document.getElementById('sf-checkin-en');
@@ -1129,8 +1128,7 @@ if (blocks2[i] === block) continue;
 const r = blocks2[i].getBoundingClientRect();
 if (ev.clientY < r.top + r.height / 2) { dropIdx = i; break; }
 }
-wrap.querySelectorAll('.mg-drop-line').forEach(el => el.remove());
-const line = document.createElement('div');
+wrap.querySelectorAll('.mg-drop-line').forEach(el => { if (el && el.parentNode) el.parentNode.removeChild(el); });const line = document.createElement('div');
 line.className = 'mg-drop-line';
 if (dropIdx >= blocks2.length) {
 const last = blocks2[blocks2.length - 1];
@@ -1146,8 +1144,7 @@ document.removeEventListener('pointerup', onUp);
 document.removeEventListener('pointercancel', onUp);
 clone.remove();
 block.classList.remove('mg-dragging');
-wrap.querySelectorAll('.mg-drop-line').forEach(el => el.remove());
-const blocks2 = Array.from(wrap.querySelectorAll('.mg-block:not(.mg-ungrouped)'));
+wrap.querySelectorAll('.mg-drop-line').forEach(el => { if (el && el.parentNode) el.parentNode.removeChild(el); });const blocks2 = Array.from(wrap.querySelectorAll('.mg-block:not(.mg-ungrouped)'));
 const curIdx = blocks2.findIndex(bl => bl.dataset.gid === gid);
 if (curIdx < 0 || dropIdx === curIdx || dropIdx === curIdx + 1) return;
 const groups = ckGroups(ckTab);

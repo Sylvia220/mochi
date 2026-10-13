@@ -2046,8 +2046,7 @@ return 14;
 function beautyDrawerApplyBottom() {
 const d = document.getElementById('beauty-drawer');
 if (!d) return;
-d.style.bottom = (beautyDockBot == null ? beautyDrawerReserve() : beautyDockBot) + 'px';
-}
+d.style.bottom = (beautyDockBot == null ? beautyDrawerReserve() : beautyDockBot) + 'px';}
 let beautyDockObs = null;
 function watchBeautyDockPages() {
 if (beautyDockObs || !('MutationObserver' in window)) return;
@@ -5640,6 +5639,7 @@ ensureP2SecondRowIcons();
 if (!node || !we) return;
 const domBefore = (() => {
 const s1 = node.closest('.page-slide');
+if (!we || typeof we.closest !== 'function') return false;
 return !!(s1 && s1 === we.closest('.page-slide') &&
 Array.prototype.indexOf.call(s1.children, node) < Array.prototype.indexOf.call(s1.children, we));
 })();
@@ -5663,11 +5663,11 @@ if (p2migDone) return;
 lay[pi] = pw.filter(w => w !== 'p2apps');
 lay[pi].splice((lay[pi].indexOf('weekend')) + 1, 0, 'p2apps');
 store.set('desk-layout', JSON.stringify(lay));
-if (domBefore || node.closest('.page-slide') !== we.closest('.page-slide')) {
-we.parentNode.insertBefore(node, we.nextSibling);
-}
+const weSlide = we && we.closest ? we.closest('.page-slide') : null;
+if (domBefore || node.closest('.page-slide') !== weSlide) {
+  if (we && we.parentNode) we.parentNode.insertBefore(node, we.nextSibling);
+}}
 try { window.applyDeskLayout(); } catch (e) {} // 重跑一次布局应用刷新各页提示与顺序
-}
 ensureP2AppsBelowWeekend();
 setTimeout(ensureP2AppsBelowWeekend, 150); // 等 buildDeskPages/ensureP3 收尾后兜底一次
 window.ensureP2AppsBelowWeekend = ensureP2AppsBelowWeekend;
@@ -7009,7 +7009,7 @@ if (t && t.height && t.top > 0) gap = Math.max(gap, Math.round(window.innerHeigh
 } catch (e) {}
 return gap;
 }
-function applyAdjPos() { if (panel) panel.style.bottom = (adjBottom == null ? bottomReserve() : adjBottom) + 'px'; }
+function applyAdjPos() { if (panel && panel.style) panel.style.bottom = (adjBottom == null ? bottomReserve() : adjBottom) + 'px'; }
 function syncMiniLabel() {
 if (!panel) return;
 const nm = adjPageName();
@@ -7090,7 +7090,7 @@ if (!tapToOpen && e.target.closest('button')) return; // header 里的按钮不�
 if (e.target.closest('input,select,textarea')) return; // #1534：滑块是本面板的主角，绝不能被拖面板劫持
 if (e.pointerType === 'mouse' && e.button !== 0) return;
 drag = true; moved = false; sy = e.clientY;
-sb = parseFloat(panel.style.bottom) || bottomReserve();
+sb = (panel && panel.style) ? (parseFloat(panel.style.bottom) || bottomReserve()) : bottomReserve();
 panel.style.transition = 'none'; // #1008：拖动期间关掉 bottom 过渡，保证跟手
 try { el.setPointerCapture(e.pointerId); } catch (er) {}
 e.preventDefault();
