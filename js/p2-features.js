@@ -1,38 +1,21 @@
-// ================= 终极护盾：防 null 崩溃 =================
+(function () { try {
+// ================= 局部终极护盾 =================
 (function() {
-  var origGetById = Document.prototype.getElementById;
-  Document.prototype.getElementById = function(id) {
-    var el = origGetById.call(this, id);
-    if (!el) {
-      // 找不到元素时，返回一个安全的“替身”，防止后面的 .addEventListener 报错
-      return { 
-        addEventListener: function(){}, 
-        style: {}, 
-        classList: { add: function(){}, remove: function(){}, toggle: function(){} },
-        setAttribute: function(){}, 
-        appendChild: function(){}
-      };
-    }
+  var _origGetById = document.getElementById;
+  document.getElementById = function(id) {
+    var el = _origGetById.call(document, id);
+    // 如果找不到元素，返回一个只有 addEventListener 的安全假对象
+    if (!el) return { addEventListener: function(){} };
     return el;
   };
-  var origQuery = Document.prototype.querySelector;
-  Document.prototype.querySelector = function(sel) {
-    var el = origQuery.call(this, sel);
-    if (!el) {
-      // 找不到元素时，同样返回替身
-      return { 
-        addEventListener: function(){}, 
-        style: {}, 
-        classList: { add: function(){}, remove: function(){}, toggle: function(){} },
-        setAttribute: function(){}, 
-        appendChild: function(){}
-      };
-    }
+  var _origQuery = document.querySelector;
+  document.querySelector = function(sel) {
+    var el = _origQuery.call(document, sel);
+    if (!el) return { addEventListener: function(){} };
     return el;
   };
 })();
-// ==========================================================
-(function () { try {
+// =================================================
 (function () {
 const uid = window.activePrefix();
 const store = window.activeStore();
