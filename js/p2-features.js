@@ -4186,13 +4186,14 @@ return out;
 } });
 document.addEventListener('contact-switched', () => {
 tpStopFlow();
-if (!pmpCPage.hidden) backHome(pmpCPage);
-if (!tpPage.hidden) tpPick();
-if (!ssPage.hidden) ssRenderCount();
+//if (!pmpCPage.hidden) backHome(pmpCPage);
+//if (!tpPage.hidden) tpPick();
+//if (!ssPage.hidden) ssRenderCount();
 if (!waterPage.hidden) waterRender();
-if (!pomoPage.hidden) pomoRender();
-if (!piggyPage.hidden) piggyRender();
+//if (!pomoPage.hidden) pomoRender();
+//if (!piggyPage.hidden) piggyRender();
 });
+} catch (e) { console.log("p2-features 忽略内部错误", e); }
 })();
 (function () {
 let lastTa = null;
