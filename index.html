@@ -11276,6 +11276,36 @@ document.addEventListener("DOMContentLoaded", function () {
 
       <!-- 第三页：经期记录等健康记录 -->
       <div class="page-slide third">
+<!-- 第三页：强制显示的完整静态版 -->
+<div class="page-slide third" id="page-slide-third" style="display: block !important; height: auto !important; min-height: 100%;">
+  <div class="app-grid p3-grid" data-app="p3" data-desk-widget="p3apps">
+    
+    <!-- 经期记录 -->
+    <div class="app" data-app="period" data-desk-widget="app-period">
+      <div class="app-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2C12 3.2 6 9.2 6 14.2a6 6 0 0 0 12 0c0-5-6-11-6-11z"/><path d="M12 16.4c0 0-2.3-1.4-2.3-2.9a1.25 1.25 0 0 1 2.3-.9 1.25 1.25 0 0 1 2.3.9c0 1.5-2.3 2.9-2.3 2.9z"/></svg></div>
+      <div class="app-name">经期记录</div>
+    </div>
+
+    <!-- 喝水（一定要保留！） -->
+    <div class="app" data-app="water" data-desk-widget="app-water">
+      <div class="app-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2C12 3.2 6 9.2 6 14.2a6 6 0 0 0 12 0c0-5-6-11-6-11z"/><path d="M12 16.4c0 0-2.3-1.4-2.3-2.9a1.25 1.25 0 0 1 2.3-.9 1.25 1.25 0 0 1 2.3.9c0 1.5-2.3 2.9-2.3 2.9z"/></svg></div>
+      <div class="app-name">喝水</div>
+    </div>
+
+    <!-- 梦角档案 -->
+    <div class="app" data-app="memo-arc" data-desk-widget="app-memo-arc">
+      <div class="app-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6.5h5L10 4.5h9a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-12z"/><path d="M12 7.6l1.2 2.7 2.7 1.2-2.7 1.2L12 15.4l-1.2-2.7-2.7-1.2 2.7-1.2z"/></svg></div>
+      <div class="app-name">梦角档案</div>
+    </div>
+
+    <!-- 我的档案 -->
+    <div class="app" data-app="my-arc" data-desk-widget="app-my-arc">
+      <div class="app-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6.5h5L10 4.5h9a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-12z"/><circle cx="12" cy="9.5" r="1.9"/><path d="M8.4 15.6c.6-1.6 2-2.4 3.6-2.4s3 .8 3.6 2.4"/></svg></div>
+      <div class="app-name">我的档案</div>
+    </div>
+
+  </div>
+</div>
 <div class="desk-period glass" data-desk-widget="desk-period" data-card-bg="desk-period">
   <div class="dpd-inner">
     <div class="dpd-label" id="dpd-label">经期</div>
@@ -14887,148 +14917,6 @@ document.addEventListener("DOMContentLoaded", function () {
       </div>
     </div>
 
-    <!-- 记账页（桌面第三页点「记账」进入） -->
-    <div class="page" id="page-accounting" hidden>
-      <div class="chat-head">
-        <span class="ch-back" id="acc-back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-        </span>
-        <span class="ch-name">记账</span>
-        <span class="acc-cog" id="acc-cog" title="分类管理"><svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
-      </div>
-      <div class="acc-scroll">
-        <!-- 视图模式 + 月份切换 + 概览 -->
-        <div class="acc-overview glass">
-          <div class="acc-view-tabs" id="acc-view-tabs">
-            <button class="acc-view-tab sel" data-view="month">月</button>
-            <button class="acc-view-tab" data-view="week">周</button>
-            <button class="acc-view-tab" data-view="year">年</button>
-          </div>
-          <div class="acc-month-head">
-            <button class="acc-month-btn" id="acc-prev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg></button>
-            <span class="acc-month-txt" id="acc-month-txt">—</span>
-            <button class="acc-month-btn" id="acc-next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
-          </div>
-          <div class="acc-ov-row">
-            <div class="acc-ov-item"><div class="acc-ov-label">支出</div><div class="acc-ov-val expense" id="acc-ov-expense">¥0</div></div>
-            <div class="acc-ov-item"><div class="acc-ov-label">收入</div><div class="acc-ov-val income" id="acc-ov-income">¥0</div></div>
-            <div class="acc-ov-item"><div class="acc-ov-label">结余</div><div class="acc-ov-val" id="acc-ov-balance">¥0</div></div>
-          </div>
-          <div class="acc-budget-wrap" id="acc-budget-wrap" hidden>
-            <div class="acc-budget-head"><span id="acc-budget-txt">本月预算 ¥0 / 已支 ¥0</span><button class="acc-budget-set" id="acc-budget-set">设置</button></div>
-            <div class="acc-budget-track"><div class="acc-budget-bar" id="acc-budget-bar"></div></div>
-          </div>
-        </div>
-
-        <!-- 图表：月度柱状图 + 分类环形图 -->
-        <div class="acc-chart-card glass" id="acc-chart-card">
-          <div class="acc-chart-title">收支分布</div>
-          <div class="acc-chart-body">
-            <div class="acc-chart-bar-wrap"><svg id="acc-chart-bar" viewBox="0 0 300 120" preserveAspectRatio="none"></svg></div>
-            <div class="acc-chart-ring-wrap"><svg id="acc-chart-ring" viewBox="0 0 120 120"></svg><div class="acc-chart-ring-center" id="acc-chart-ring-center"></div></div>
-          </div>
-        </div>
-
-        <!-- 分类排行 -->
-        <div class="acc-rank-card glass" id="acc-rank-card">
-          <div class="acc-rank-title">分类排行（本月支出）</div>
-          <div class="acc-rank-list" id="acc-rank-list"></div>
-        </div>
-
-        <!-- 记一笔 / 编辑表单 -->
-        <div class="acc-form-card glass" id="acc-form-card">
-          <div class="acc-form-head">
-            <span class="acc-form-title" id="acc-form-title">记一笔</span>
-            <button class="acc-cancel" id="acc-cancel" hidden>取消</button>
-          </div>
-          <div class="acc-type-tabs" id="acc-type-tabs">
-            <button class="acc-type-tab sel" data-type="expense">支出</button>
-            <button class="acc-type-tab" data-type="income">收入</button>
-          </div>
-          <input class="acc-amount" id="acc-amount" type="text" inputmode="decimal" placeholder="金额">
-          <div class="acc-cat-grid" id="acc-cat-grid"></div>
-          <input class="acc-note" id="acc-note" type="text" placeholder="备注（可选）">
-          <div class="acc-form-row">
-            <input class="acc-date" id="acc-date" type="date">
-            <button class="acc-save" id="acc-save">记一笔</button>
-          </div>
-        </div>
-
-        <!-- 搜索 + 筛选 -->
-        <div class="acc-filter-card glass">
-          <input class="acc-search" id="acc-search" type="search" placeholder="搜索备注/分类/金额">
-          <div class="acc-filter-tabs" id="acc-filter-tabs">
-            <button class="acc-filter-tab sel" data-filter="all">全部</button>
-            <button class="acc-filter-tab" data-filter="expense">支出</button>
-            <button class="acc-filter-tab" data-filter="income">收入</button>
-          </div>
-        </div>
-
-        <!-- 记录列表 -->
-        <div class="acc-list-card glass">
-          <div class="acc-list" id="acc-list"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 花园页（桌面第二页点「花园」进入） -->
-    <div class="page" id="page-garden" hidden>
-      <div class="chat-head">
-        <span class="ch-back" id="garden-back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-        </span>
-        <span class="ch-name">花园</span>
-      </div>
-      <div class="garden-scroll">
-        <!-- 天气 + 花园状态 -->
-        <div class="garden-weather-bar" id="garden-weather-bar">
-          <span class="garden-weather-ico" id="garden-weather-ico">☀️</span>
-          <span class="garden-weather-txt" id="garden-weather-txt">晴朗 · 适合浇水</span>
-          <span class="garden-season" id="garden-season">🌸 春季</span>
-        </div>
-        <div class="garden-level-bar" id="garden-level-bar"></div>
-        <div class="garden-grid" id="garden-grid"></div>
-        <div class="garden-stats" id="garden-stats"></div>
-        <div class="garden-visitor" id="garden-visitor"></div>
-        <!-- 工具条 -->
-        <div class="garden-toolbar" id="garden-toolbar">
-          <button class="garden-tool" data-tool="water" title="浇水">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5S8 8.5 8 12a4 4 0 008 0c0-3.5-4-9.5-4-9.5z"/><path d="M8 18v2a2 2 0 002 2h4a2 2 0 002-2v-2"/></svg>
-            <span class="garden-tool-label">浇水</span>
-          </button>
-          <button class="garden-tool" data-tool="plant" title="种植">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 21h10l-1.5-5h-7z"/><path d="M12 16v-7"/><path d="M12 12c-2 0-3.5-1-3.5-3"/><path d="M12 10c2 0 3.5-1 3.5-3"/><circle cx="12" cy="6" r="2"/></svg>
-            <span class="garden-tool-label">种植</span>
-          </button>
-          <button class="garden-tool" data-tool="fertilize" title="施肥">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l2 5h8l2-5"/><path d="M12 3v3"/><path d="M9 6h6"/><rect x="5" y="14" width="14" height="6" rx="1"/></svg>
-            <span class="garden-tool-label">施肥</span>
-          </button>
-          <button class="garden-tool" data-tool="harvest" title="收获">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6l3 4h12l3-4"/><path d="M6 10v8a2 2 0 002 2h8a2 2 0 002-2v-8"/><path d="M12 10v10"/><path d="M9 14h6"/></svg>
-            <span class="garden-tool-label">收获</span>
-          </button>
-          <button class="garden-tool batch" data-tool="waterall" title="一键浇水">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3S4 7 4 9.5a3 3 0 006 0C10 7 7 3 7 3z"/><path d="M17 3S14 7 14 9.5a3 3 0 006 0C20 7 17 3 17 3z"/><path d="M12 11S9 15 9 17.5a3 3 0 006 0C15 15 12 11 12 11z"/></svg>
-            <span class="garden-tool-label">全浇</span>
-          </button>
-          <button class="garden-tool batch" data-tool="harvestall" title="一键收获">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h18l-2 12H5z"/><path d="M8 8V5a4 4 0 018 0v3"/><path d="M12 12v4"/></svg>
-            <span class="garden-tool-label">全收</span>
-          </button>
-        </div>
-        <!-- 花园日志 -->
-        <div class="garden-log glass" id="garden-log">
-          <div class="garden-log-title">花园日志</div>
-          <div class="garden-log-list" id="garden-log-list"></div>
-        </div>
-        <div class="garden-dex glass" id="garden-dex"></div>
-        <div class="garden-inv glass" id="garden-inv"></div>
-        <div class="garden-decor glass" id="garden-decor"></div>
-        <div class="garden-lb glass" id="garden-lb"></div>
-      </div>
-    </div>
-
     <!-- 占卜页（桌面点「占卜」进入） -->
     <div class="page" id="page-divine" hidden>
       <div class="chat-head">
@@ -15257,9 +15145,6 @@ document.addEventListener("DOMContentLoaded", function () {
       <div class="fav-tabs">
         <button class="fav-tab sel" data-htab="av">换头像记录</button>
         <button class="fav-tab" data-htab="call">通话记录</button>
-        <button class="fav-tab" data-htab="fish">每日摸鱼值</button>
-        <button class="fav-tab" data-htab="work">每日打工值</button>
-        <button class="fav-tab" data-htab="catch">摸鱼抓包</button>
         <button class="fav-tab" data-htab="coinearn">心意币赚钱记录</button>
         <button class="fav-tab" data-htab="coinask">心意币申请记录</button>
         <button class="fav-tab" data-htab="coinrp">心意币红包记录</button>
@@ -15283,18 +15168,6 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="cal-card glass" data-hpanel="call" hidden>
           <div class="cal-card-title">通话记录</div>
           <div id="home-call"></div>
-        </div>
-        <div class="cal-card glass" data-hpanel="fish" hidden>
-          <div class="cal-card-title">每日摸鱼值记录</div>
-          <div id="home-fish"></div>
-        </div>
-        <div class="cal-card glass" data-hpanel="work" hidden>
-          <div class="cal-card-title">每日打工值记录</div>
-          <div id="home-work"></div>
-        </div>
-        <div class="cal-card glass" data-hpanel="catch" hidden>
-          <div class="cal-card-title">摸鱼抓包记录</div>
-          <div id="home-catch"></div>
         </div>
         <!-- v3.16.x：心意币流水（赚钱/申请），分列我和当前联系人的入账 -->
         <div class="cal-card glass" data-hpanel="coinearn" hidden>
@@ -15339,22 +15212,6 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="cal-card glass" data-hpanel="quotes" hidden>
           <div class="cal-card-title">情话存档</div>
           <div id="home-quotes"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- 游乐室全屏页（主页页入口卡进入，返回回主页页；src/js/arcade.js） -->
-    <div class="page" id="page-arcade" hidden>
-      <div class="chat-head">
-        <span class="ch-back" id="arcade-back">
-          <svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-        </span>
-        <span class="ch-name">游乐室 · 和 <b id="arcade-lg-partner">TA</b> 的战绩</span>
-      </div>
-      <div class="cal-scroll">
-        <div class="arc-wrap">
-          <div id="arcade-body"></div>
-          <div class="pong-foot">幸运游戏当日奖励 ×2 · 胜利有概率掉落限定摆件 · 战绩按联系人桌面分开记</div>
         </div>
       </div>
     </div>
