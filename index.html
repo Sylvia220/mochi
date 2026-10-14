@@ -11295,23 +11295,29 @@ document.addEventListener("DOMContentLoaded", function () {
 </div>
 </div>
 <div class="app-grid p3-grid" data-app="p3" data-desk-widget="p3apps">
-<!-- 静态喝水图标，防止第三页为空被隐藏 -->
+//<!-- 静态喝水图标，防止第三页为空被隐藏 -->
+<!-- 经期记录 -->
+<div class="app" data-app="period" data-desk-widget="app-period">
+  <div class="app-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2C12 3.2 6 9.2 6 14.2a6 6 0 0 0 12 0c0-5-6-11-6-11z"/><path d="M12 16.4c0 0-2.3-1.4-2.3-2.9a1.25 1.25 0 0 1 2.3-.9 1.25 1.25 0 0 1 2.3.9c0 1.5-2.3 2.9-2.3 2.9z"/></svg></div>
+  <div class="app-name">经期记录</div>
+</div>
+
+<!-- 梦角档案 -->
+<div class="app" data-app="memo-arc" data-desk-widget="app-memo-arc">
+  <div class="app-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6.5h5L10 4.5h9a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-12z"/><path d="M12 7.6l1.2 2.7 2.7 1.2-2.7 1.2L12 15.4l-1.2-2.7-2.7-1.2 2.7-1.2z"/></svg></div>
+  <div class="app-name">梦角档案</div>
+</div>
+
+<!-- 我的档案 -->
+<div class="app" data-app="my-arc" data-desk-widget="app-my-arc">
+  <div class="app-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6.5h5L10 4.5h9a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-12z"/><circle cx="12" cy="9.5" r="1.9"/><path d="M8.4 15.6c.6-1.6 2-2.4 3.6-2.4s3 .8 3.6 2.4"/></svg></div>
+  <div class="app-name">我的档案</div>
+</div>
+
+<!-- 喝水图标（之前发过的，一并放这） -->
 <div class="app" data-app="water" data-desk-widget="app-water">
   <div class="app-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2C12 3.2 6 9.2 6 14.2a6 6 0 0 0 12 0c0-5-6-11-6-11z"/><path d="M12 16.4c0 0-2.3-1.4-2.3-2.9a1.25 1.25 0 0 1 2.3-.9 1.25 1.25 0 0 1 2.3.9c0 1.5-2.3 2.9-2.3 2.9z"/></svg></div>
   <div class="app-name">喝水</div>
-</div>
-<div class="app" data-app="period" data-desk-widget="app-period">
-<div class="app-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2C12 3.2 6 9.2 6 14.2a6 6 0 0 0 12 0c0-5-6-11-6-11z"/><path d="M12 16.4c0 0-2.3-1.4-2.3-2.9a1.25 1.25 0 0 1 2.3-.9 1.25 1.25 0 0 1 2.3.9c0 1.5-2.3 2.9-2.3 2.9z"/></svg></div>
-<div class="app-name">经期记录</div>
-</div>
-<div class="app" data-app="memo-arc" data-desk-widget="app-memo-arc">
-<div class="app-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6.5h5L10 4.5h9a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-12z"/><path d="M12 7.6l1.2 2.7 2.7 1.2-2.7 1.2L12 15.4l-1.2-2.7-2.7-1.2 2.7-1.2z"/></svg></div>
-<div class="app-name">梦角档案</div>
-</div>
-<!-- v3.16.x：我的档案（认识自己；与梦角档案互为镜像）桌面第三页入口，紧邻梦角档案右侧 -->
-<div class="app" data-app="my-arc" data-desk-widget="app-my-arc">
-<div class="app-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6.5h5L10 4.5h9a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-12z"/><circle cx="12" cy="9.5" r="1.9"/><path d="M8.4 15.6c.6-1.6 2-2.4 3.6-2.4s3 .8 3.6 2.4"/></svg></div>
-<div class="app-name">我的档案</div>
 </div>
 <!-- 本页动态注入 喝水/吃什么/存钱罐/番茄钟（p2-features.js，喝水排在本页静态图标之后） -->
 </div>
