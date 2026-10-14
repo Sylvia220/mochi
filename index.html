@@ -11275,18 +11275,35 @@ document.addEventListener("DOMContentLoaded", function () {
       </div><!-- /page-slide 第二页 -->
 
       <!-- 第三页：经期记录等健康记录 -->
-      <div class="page-slide third">
-<!-- 第三页：强制显示的完整静态版 -->
-<div class="page-slide third" id="page-slide-third" style="display: block !important; height: auto !important; min-height: 100%;">
+<!-- 第三页：完全体 -->
+<div class="page-slide third">
+  <div class="desk-period glass" data-desk-widget="desk-period" data-card-bg="desk-period">
+    <div class="dpd-inner">
+      <div class="dpd-label" id="dpd-label">经期</div>
+      <div class="dpd-days" id="dpd-days">—</div>
+      <div class="dpd-sub" id="dpd-sub">未记录</div>
+    </div>
+  </div>
+
+  <div class="mini-row" data-desk-widget="memo-row">
+    <div class="mini-card glass memo-card" data-card-bg="memo">
+      <div class="mc-top">今日备忘</div>
+      <div class="mc-b" id="memo-text" title="点击记录">点这里记一句话</div>
+    </div>
+    <div class="mini-card glass mood-card" data-card-bg="mood">
+      <div class="mc-top">今天的心情</div>
+      <div class="mc-b" id="today-mood-text">点一下选心情</div>
+    </div>
+  </div>
+
   <div class="app-grid p3-grid" data-app="p3" data-desk-widget="p3apps">
-    
     <!-- 经期记录 -->
     <div class="app" data-app="period" data-desk-widget="app-period">
       <div class="app-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2C12 3.2 6 9.2 6 14.2a6 6 0 0 0 12 0c0-5-6-11-6-11z"/><path d="M12 16.4c0 0-2.3-1.4-2.3-2.9a1.25 1.25 0 0 1 2.3-.9 1.25 1.25 0 0 1 2.3.9c0 1.5-2.3 2.9-2.3 2.9z"/></svg></div>
       <div class="app-name">经期记录</div>
     </div>
 
-    <!-- 喝水（一定要保留！） -->
+    <!-- 喝水 -->
     <div class="app" data-app="water" data-desk-widget="app-water">
       <div class="app-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2C12 3.2 6 9.2 6 14.2a6 6 0 0 0 12 0c0-5-6-11-6-11z"/><path d="M12 16.4c0 0-2.3-1.4-2.3-2.9a1.25 1.25 0 0 1 2.3-.9 1.25 1.25 0 0 1 2.3.9c0 1.5-2.3 2.9-2.3 2.9z"/></svg></div>
       <div class="app-name">喝水</div>
@@ -11303,96 +11320,15 @@ document.addEventListener("DOMContentLoaded", function () {
       <div class="app-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6.5h5L10 4.5h9a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-12z"/><circle cx="12" cy="9.5" r="1.9"/><path d="M8.4 15.6c.6-1.6 2-2.4 3.6-2.4s3 .8 3.6 2.4"/></svg></div>
       <div class="app-name">我的档案</div>
     </div>
-
   </div>
 </div>
-<div class="desk-period glass" data-desk-widget="desk-period" data-card-bg="desk-period">
-  <div class="dpd-inner">
-    <div class="dpd-label" id="dpd-label">经期</div>
-    <div class="dpd-days" id="dpd-days">—</div>
-    <div class="dpd-sub" id="dpd-sub">未记录</div>
-  </div>
-</div>
-<!-- v3.13.x：今日备忘 + 今天的心情（自第二页移入，放经期卡下方） -->
-<div class="mini-row" data-desk-widget="memo-row">
-<div class="mini-card glass memo-card" data-card-bg="memo">
-<div class="mc-top">今日备忘</div>
-<div class="mc-b" id="memo-text" title="点击记录">点这里记一句话</div>
-</div>
-<div class="mini-card glass mood-card" data-card-bg="mood">
-<div class="mc-top">今天的心情</div>
-<div class="mc-b" id="today-mood-text">点一下选心情</div>
-</div>
-</div>
-<div class="app-grid p3-grid" data-app="p3" data-desk-widget="p3apps">
-//<!-- 静态喝水图标，防止第三页为空被隐藏 -->
-<!-- 经期记录 -->
-<div class="app" data-app="period" data-desk-widget="app-period">
-  <div class="app-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2C12 3.2 6 9.2 6 14.2a6 6 0 0 0 12 0c0-5-6-11-6-11z"/><path d="M12 16.4c0 0-2.3-1.4-2.3-2.9a1.25 1.25 0 0 1 2.3-.9 1.25 1.25 0 0 1 2.3.9c0 1.5-2.3 2.9-2.3 2.9z"/></svg></div>
-  <div class="app-name">经期记录</div>
-</div>
 
-<!-- 梦角档案 -->
-<div class="app" data-app="memo-arc" data-desk-widget="app-memo-arc">
-  <div class="app-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6.5h5L10 4.5h9a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-12z"/><path d="M12 7.6l1.2 2.7 2.7 1.2-2.7 1.2L12 15.4l-1.2-2.7-2.7-1.2 2.7-1.2z"/></svg></div>
-  <div class="app-name">梦角档案</div>
+<!-- 分页指示器：必须要有 3 个圆点！ -->
+<div class="dots" id="desktop-dots">
+  <span class="dot active"></span>
+  <span class="dot"></span>
+  <span class="dot"></span> <!-- 这第三个点就是唤醒第三页的钥匙！ -->
 </div>
-
-<!-- 我的档案 -->
-<div class="app" data-app="my-arc" data-desk-widget="app-my-arc">
-  <div class="app-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 6.5h5L10 4.5h9a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-12z"/><circle cx="12" cy="9.5" r="1.9"/><path d="M8.4 15.6c.6-1.6 2-2.4 3.6-2.4s3 .8 3.6 2.4"/></svg></div>
-  <div class="app-name">我的档案</div>
-</div>
-
-<!-- 喝水图标（之前发过的，一并放这） -->
-<div class="app" data-app="water" data-desk-widget="app-water">
-  <div class="app-ico"><svg viewBox="0 0 24 24" fill="none" stroke="#111111" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.2C12 3.2 6 9.2 6 14.2a6 6 0 0 0 12 0c0-5-6-11-6-11z"/><path d="M12 16.4c0 0-2.3-1.4-2.3-2.9a1.25 1.25 0 0 1 2.3-.9 1.25 1.25 0 0 1 2.3.9c0 1.5-2.3 2.9-2.3 2.9z"/></svg></div>
-  <div class="app-name">喝水</div>
-</div>
-<!-- 本页动态注入 喝水/吃什么/存钱罐/番茄钟（p2-features.js，喝水排在本页静态图标之后） -->
-</div>
-      </div><!-- /page-slide 第三页 -->
-      </div><!-- /desktop-pages -->
-
-      <!-- 桌面小组件隐藏池：被移除/未添加的组件暂存于此（display:none）。
-           新增组件默认放池里，用户从装修模式组件库添加到目标页。 -->
-      <div id="desk-widget-pool" style="display:none">
-        <!-- 时钟组件 -->
-        <div class="desk-clock glass" data-desk-widget="desk-clock" data-card-bg="desk-clock">
-          <div class="dc-time" id="dc-time">00:00</div>
-          <div class="dc-date" id="dc-date">— · — 月 — 日</div>
-        </div>
-        <!-- 月历组件 -->
-        <div class="desk-cal glass" data-desk-widget="desk-calendar" data-card-bg="desk-calendar">
-          <div class="dcal-head"><span class="dcal-title" id="dcal-title">—</span></div>
-          <div class="dcal-grid" id="dcal-grid"></div>
-        </div>
-        <!-- 计时器组件 -->
-        <div class="desk-timer glass" data-desk-widget="desk-timer" data-card-bg="desk-timer">
-          <div class="dt-disp" id="dt-disp">00:00.0</div>
-          <div class="dt-mode-label" id="dt-mode-label">正计时</div>
-          <div class="dt-controls">
-            <button class="dt-btn" id="dt-start">开始</button>
-            <button class="dt-btn" id="dt-reset">重置</button>
-            <button class="dt-btn" id="dt-toggle-mode">倒计时</button>
-          </div>
-        </div>
-        <!-- 纪念日倒计时组件 -->
-        <div class="desk-anniv glass" data-desk-widget="desk-anniv" data-card-bg="desk-anniv">
-          <div class="da-label">距下一个纪念日</div>
-          <div class="da-days" id="da-days">—</div>
-          <div class="da-name" id="da-name">未设置</div>
-        </div>
-
-      </div>
-
-      <!-- 分页指示器 -->
-      <div class="dots" id="desktop-dots">
-        <span class="dot active"></span>
-        <span class="dot"></span>
-      </div>
-    </div>
-
         <!-- 聊天字卡库页（字卡库列表） -->
     <div class="page" id="page-chatcard" hidden>
       <div class="chat-title">字卡库</div>
